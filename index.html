@@ -1,394 +1,1542 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ezz Tantawy | Creative Portfolio</title>
-  <meta name="description" content="Creative portfolio for Ezz Tantawy: video editing, 3D visualization, rendering, and AI-assisted video production." />
-  <link rel="icon" type="image/png" href="assets/ezz-favicon.png" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="preload" as="image" href="assets/ezz-profile-dark.jpg" />
-  <link rel="preload" as="image" href="assets/ezz-profile-light.jpg" />
-  <link rel="preload" as="image" href="assets/project-plains-youtube-channel.jpg" />
-  <link rel="preload" as="image" href="assets/project-teleperformance-media-coverage.jpg" />
-  <link rel="preload" as="image" href="assets/project-tamatem-heroes-land-ad.jpg" />
-  <link rel="preload" as="image" href="assets/project-color-grading-raw-footage.jpg" />
-  <link rel="preload" as="image" href="assets/project-urgent-course-reel.jpg" />
-  <link rel="preload" as="image" href="assets/project-waraha-hekaya-editor.jpg" />
-  <link rel="preload" as="image" href="assets/project-automotive-service-center.jpg" />
-  <link rel="preload" as="image" href="assets/project-apartment-visualization.jpg" />
-  <link rel="preload" as="image" href="assets/project-apartment-floor-plan-visualization.jpg" />
-  <link rel="preload" as="image" href="assets/project-comfyui-ai-animation.jpg" />
-  <link rel="preload" as="image" href="assets/project-ai-building-vfx-animation.jpg" />
-  <link rel="stylesheet" href="styles.css?v=20260605-color-grading-sample" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Islam Ali | Editor & Colorist</title>
+  <meta name="description" content="Islam Ali portfolio for video editing, color grading, visual storytelling, and campaign-ready content." />
+  <style>
+    :root {
+      --bg: #090909;
+      --bg-2: #11100f;
+      --panel: #171513;
+      --panel-2: #211d19;
+      --text: #f6efe4;
+      --muted: #b9aea1;
+      --faint: #756b61;
+      --line: rgba(246, 239, 228, 0.14);
+      --accent: #ff8a3d;
+      --accent-2: #ffd08a;
+      --rose: #ff7a85;
+      --blue: #86b7ff;
+      --green: #98d8b5;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 76% 8%, rgba(255, 138, 61, 0.2), transparent 27rem),
+        radial-gradient(circle at 14% 22%, rgba(134, 183, 255, 0.13), transparent 24rem),
+        linear-gradient(180deg, var(--bg), #0c0a09 58%, var(--bg));
+      color: var(--text);
+      overflow-x: hidden;
+      transition: background 0.9s var(--ease), color 0.9s var(--ease);
+    }
+
+    body.light {
+      --bg: #f4efe6;
+      --bg-2: #fff7ec;
+      --panel: #fff8ee;
+      --panel-2: #fff0dd;
+      --text: #191411;
+      --muted: #62584f;
+      --faint: #8b7c6d;
+      --line: rgba(25, 20, 17, 0.14);
+      color-scheme: light;
+      background:
+        radial-gradient(circle at 76% 8%, rgba(255, 138, 61, 0.22), transparent 27rem),
+        radial-gradient(circle at 14% 22%, rgba(134, 183, 255, 0.15), transparent 24rem),
+        linear-gradient(180deg, var(--bg), #fff8ee 58%, var(--bg));
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    .cursor-ring,
+    .cursor-dot {
+      pointer-events: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 100;
+      border-radius: 999px;
+      opacity: 0;
+      transform: translate3d(-80px, -80px, 0);
+    }
+
+    .cursor-ring {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255, 208, 138, 0.65);
+      transition: width 0.2s, height 0.2s, border-color 0.2s, opacity 0.2s;
+    }
+
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      box-shadow: 0 0 20px rgba(255, 138, 61, 0.75);
+    }
+
+    body.cursor-ready .cursor-ring,
+    body.cursor-ready .cursor-dot {
+      opacity: 1;
+    }
+
+    body.cursor-active .cursor-ring {
+      width: 54px;
+      height: 54px;
+      border-color: rgba(255, 255, 255, 0.72);
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      transition: transform 0.9s var(--ease);
+    }
+
+    .site-shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(9, 9, 9, 0.78);
+      border-bottom: 1px solid var(--line);
+      transition: 0.74s var(--ease);
+    }
+
+    body.light .nav {
+      background: rgba(244, 239, 230, 0.78);
+    }
+
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-weight: 820;
+      letter-spacing: 0;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .nav-links a,
+    .theme-switch,
+    .play-mode-btn,
+    .nav-cta {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 0 14px;
+      background: transparent;
+      cursor: pointer;
+      transition: 0.24s var(--ease);
+    }
+
+    .nav-links a:hover,
+    .theme-switch:hover,
+    .play-mode-btn:hover {
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.045);
+      transform: translateY(-1px);
+    }
+
+    .nav-links .nav-cta {
+      color: #17100a;
+      background: var(--accent);
+      border-color: transparent;
+      font-weight: 800;
+      box-shadow: 0 12px 28px rgba(255, 138, 61, 0.26);
+    }
+
+    .theme-switch {
+      gap: 8px;
+      color: var(--text);
+    }
+
+    .theme-track {
+      width: 32px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
+      position: relative;
+    }
+
+    .theme-thumb {
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      border-radius: 999px;
+      background: var(--accent-2);
+      transition: transform 0.7s var(--ease), background 0.7s, box-shadow 0.7s;
+      box-shadow: 0 0 16px rgba(255, 208, 138, 0.5);
+    }
+
+    body.light .theme-thumb {
+      transform: translateX(13px);
+      background: var(--accent);
+    }
+
+    .fun-layer {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .grain {
+      position: fixed;
+      inset: -40px;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: linear-gradient(115deg, rgba(255,255,255,0.08), transparent 28%, rgba(255,138,61,0.08) 48%, transparent 68%);
+      filter: blur(46px);
+      animation: ambientDrift 12s var(--ease) infinite alternate;
+    }
+
+    @keyframes ambientDrift {
+      from { transform: translate3d(-2%, -1%, 0) rotate(-1deg); }
+      to { transform: translate3d(2%, 1%, 0) rotate(1deg); }
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+      gap: clamp(30px, 6vw, 74px);
+      align-items: center;
+      min-height: calc(100svh - 74px);
+      padding: 58px 0 42px;
+    }
+
+    .hero-photo {
+      position: relative;
+      min-height: 610px;
+      display: grid;
+      align-items: end;
+      order: 2;
+    }
+
+    .portrait {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      min-height: 570px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(135deg, rgba(255, 138, 61, 0.19), transparent 36%),
+        linear-gradient(225deg, rgba(134, 183, 255, 0.14), transparent 36%),
+        url("assets/islam-ali-portrait.jpg") center top / cover;
+      transition: transform 0.7s var(--ease), filter 0.7s var(--ease);
+      transform: scale(1.012);
+    }
+
+    .hero-photo:hover .portrait {
+      transform: scale(1.035);
+      filter: saturate(1.08) contrast(1.04);
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 36%, rgba(9, 9, 9, 0.88));
+    }
+
+    body.light .portrait::after,
+    body.light .project-card::after {
+      background: linear-gradient(180deg, transparent 24%, rgba(25, 20, 17, 0.82));
+    }
+
+    .role-stack {
+      position: absolute;
+      inset: auto 20px 20px;
+      z-index: 1;
+      display: grid;
+      gap: 10px;
+    }
+
+    .role-stack span {
+      width: fit-content;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(9, 9, 9, 0.72);
+      backdrop-filter: blur(14px);
+      border-radius: 999px;
+      padding: 11px 14px;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    body.light .role-stack span {
+      background: rgba(255, 248, 238, 0.72);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    .eyebrow {
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      font-weight: 820;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      max-width: 800px;
+      font-size: clamp(3.1rem, 8vw, 7.15rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+    }
+
+    .hero-copy p {
+      max-width: 710px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      line-height: 1.76;
+      margin-top: 26px;
+    }
+
+    .role-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .role-card {
+      position: relative;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.035);
+      border-radius: 999px;
+      padding: 10px 14px 10px 35px;
+      font-size: 0.9rem;
+      transition: 0.24s var(--ease);
+      transform: rotate(var(--tilt));
+    }
+
+    .role-card::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--accent);
+      transform: translateY(-50%);
+      box-shadow: 0 0 18px rgba(255, 138, 61, 0.45);
+    }
+
+    .role-card:hover {
+      transform: rotate(0deg) translateY(-3px);
+      border-color: rgba(255, 208, 138, 0.45);
+      background: rgba(255, 138, 61, 0.09);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-radius: 999px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-weight: 800;
+      transition: 0.26s var(--ease);
+      cursor: pointer;
+    }
+
+    .btn.primary,
+    .btn-dark {
+      color: #17100a;
+      background: var(--accent);
+      border-color: transparent;
+      box-shadow: 0 16px 30px rgba(255, 138, 61, 0.22);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.035);
+      margin-top: -12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .metric {
+      padding: 18px;
+      border-right: 1px solid var(--line);
+      transition: 0.24s var(--ease);
+    }
+
+    .metric:last-child {
+      border-right: 0;
+    }
+
+    .metric:hover {
+      background: rgba(255, 138, 61, 0.08);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.28rem;
+      color: var(--accent-2);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.83rem;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+    section {
+      padding: 86px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(320px, 1fr);
+      gap: 34px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .kicker {
+      color: var(--accent);
+      font-weight: 820;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(2.05rem, 4.5vw, 4rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-head p,
+    .about-grid p,
+    .process-card p,
+    .project-card p,
+    .contact-copy,
+    .request-copy {
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.76fr);
+      gap: 24px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025));
+      border-radius: 8px;
+      padding: clamp(22px, 4vw, 34px);
+      transition: 0.34s var(--ease);
+    }
+
+    .panel:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 208, 138, 0.28);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.18);
+    }
+
+    .chip-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .chip {
+      border-radius: 999px;
+      padding: 9px 12px;
+      background: rgba(255, 138, 61, 0.09);
+      border: 1px solid rgba(255, 138, 61, 0.2);
+      color: #ffd9b8;
+      font-size: 0.88rem;
+      transition: 0.22s var(--ease);
+    }
+
+    body.light .chip {
+      color: #693813;
+    }
+
+    .chip:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 138, 61, 0.16);
+    }
+
+    .work-access-note {
+      margin-top: -16px;
+      margin-bottom: 22px;
+      color: var(--faint);
+      font-size: 0.94rem;
+    }
+
+    .tabs-shell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .tab-btn {
+      min-height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--muted);
+      padding: 0 15px;
+      cursor: pointer;
+      font-weight: 780;
+      transition: 0.25s var(--ease);
+    }
+
+    .tab-btn:hover,
+    .tab-btn.active {
+      color: #17100a;
+      border-color: transparent;
+      background: var(--accent-2);
+      transform: translateY(-2px);
+    }
+
+    .project-stage {
+      position: relative;
+    }
+
+    .project-track {
+      display: none;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-track.active {
+      display: grid;
+      animation: trackIn 0.45s var(--ease);
+    }
+
+    @keyframes trackIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 455px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      display: flex;
+      align-items: flex-end;
+      isolation: isolate;
+      cursor: pointer;
+      transition: 0.34s var(--ease);
+      text-align: left;
+      padding: 0;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--image) center / cover;
+      transform: scale(1.04);
+      transition: 0.45s var(--ease);
+      z-index: -2;
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 10%, rgba(9, 9, 9, 0.9) 78%);
+      z-index: -1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(255, 208, 138, 0.35);
+      box-shadow: var(--shadow);
+    }
+
+    .project-card:hover::before {
+      transform: scale(1.1);
+    }
+
+    .press-label {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 1;
+      color: #17100a;
+      background: var(--accent-2);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 0.74rem;
+      font-weight: 820;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: 0.26s var(--ease);
+    }
+
+    .project-card:hover .press-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-body {
+      padding: 24px;
+    }
+
+    .project-tag {
+      width: fit-content;
+      color: #17100a;
+      background: var(--accent-2);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 0.75rem;
+      font-weight: 820;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+      line-height: 1.08;
+      margin-bottom: 12px;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      color: var(--faint);
+      font-size: 0.82rem;
+    }
+
+    .project-meta span {
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 999px;
+      padding: 6px 8px;
+      background: rgba(0, 0, 0, 0.24);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      counter-reset: process;
+    }
+
+    .process-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 22px;
+      min-height: 250px;
+      transition: 0.34s var(--ease);
+    }
+
+    .process-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 208, 138, 0.28);
+    }
+
+    .process-card::before {
+      counter-increment: process;
+      content: "0" counter(process);
+      display: inline-flex;
+      color: var(--accent);
+      font-weight: 820;
+      margin-bottom: 34px;
+    }
+
+    .process-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 12px;
+    }
+
+    .request-card,
+    .contact-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: clamp(26px, 5vw, 46px);
+      background:
+        linear-gradient(135deg, rgba(255, 138, 61, 0.14), transparent 34%),
+        var(--panel-2);
+    }
+
+    .request-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .choice-btn {
+      min-height: 76px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      cursor: pointer;
+      color: var(--text);
+      padding: 12px;
+      font-weight: 780;
+      text-align: left;
+      transition: 0.24s var(--ease);
+    }
+
+    .choice-btn.active,
+    .choice-btn:hover {
+      background: rgba(255, 138, 61, 0.12);
+      border-color: rgba(255, 138, 61, 0.34);
+      transform: translateY(-2px);
+    }
+
+    .request-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 720;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--text);
+      padding: 13px 14px;
+      outline: 0;
+      transition: 0.22s var(--ease);
+    }
+
+    .field textarea {
+      min-height: 124px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: rgba(255, 138, 61, 0.48);
+      box-shadow: 0 0 0 3px rgba(255, 138, 61, 0.12);
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .contact-actions {
+      display: grid;
+      gap: 10px;
+      min-width: 230px;
+    }
+
+    footer {
+      padding: 26px 0 34px;
+      color: var(--faint);
+      border-top: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 80;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.64);
+      backdrop-filter: blur(16px);
+    }
+
+    .modal-backdrop.open {
+      display: grid;
+      animation: fadeIn 0.24s var(--ease);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal {
+      width: min(920px, 100%);
+      max-height: min(760px, calc(100svh - 40px));
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      transform: translateY(14px) scale(0.98);
+      animation: modalIn 0.28s var(--ease) forwards;
+    }
+
+    @keyframes modalIn {
+      to { transform: translateY(0) scale(1); }
+    }
+
+    .modal-media {
+      min-height: 300px;
+      background: var(--modal-image) center / cover;
+      position: relative;
+    }
+
+    .modal-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(9, 9, 9, 0.86));
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      cursor: pointer;
+      transition: 0.22s var(--ease);
+    }
+
+    .close-modal:hover {
+      transform: rotate(90deg);
+      background: var(--accent);
+      color: #17100a;
+    }
+
+    .modal-content {
+      padding: clamp(22px, 4vw, 36px);
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(230px, 0.42fr);
+      gap: 26px;
+      margin-top: 18px;
+    }
+
+    .breakdown {
+      display: grid;
+      gap: 11px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .fact-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .fact {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--accent-2);
+      margin-bottom: 3px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.74s var(--ease), transform 0.74s var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal:nth-child(2) { transition-delay: 0.045s; }
+    .reveal:nth-child(3) { transition-delay: 0.09s; }
+    .reveal:nth-child(4) { transition-delay: 0.135s; }
+
+    body.fun-mode .page {
+      transform: perspective(1200px) rotateX(0.4deg);
+    }
+
+    body.fun-mode .grain {
+      opacity: 0.36;
+      animation-duration: 5s;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .section-head,
+      .about-grid,
+      .request-card,
+      .contact-card,
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-photo {
+        min-height: 490px;
+      }
+
+      .portrait {
+        min-height: 480px;
+      }
+
+      .project-track,
+      .process-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .cursor-ring,
+      .cursor-dot {
+        display: none;
+      }
+
+      .site-shell {
+        width: min(100% - 22px, 1180px);
+      }
+
+      .nav-inner {
+        min-height: auto;
+        padding: 14px 0;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+
+      .nav-links a,
+      .theme-switch,
+      .play-mode-btn,
+      .nav-cta {
+        min-height: 34px;
+        padding: 0 10px;
+      }
+
+      .play-mode-btn {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 38px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 15vw, 4.8rem);
+      }
+
+      .hero-photo,
+      .portrait {
+        min-height: 420px;
+      }
+
+      .metrics,
+      .project-track,
+      .process-grid,
+      .choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .metric:last-child {
+        border-bottom: 0;
+      }
+
+      .project-card {
+        min-height: 390px;
+      }
+
+      .contact-actions {
+        min-width: 0;
+      }
+
+      section {
+        padding: 64px 0;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="intro-screen" id="introScreen" aria-hidden="true">
-    <div class="intro-core">
-      <span class="intro-progress-ring" aria-hidden="true"></span>
-      <span class="intro-orbit intro-orbit-a" aria-hidden="true"></span>
-      <span class="intro-orbit intro-orbit-b" aria-hidden="true"></span>
-      <span class="intro-orbit intro-orbit-c" aria-hidden="true"></span>
-      <img class="theme-portrait" src="assets/ezz-profile-dark.jpg" data-dark-src="assets/ezz-profile-dark.jpg" data-light-src="assets/ezz-profile-light.jpg" alt="" decoding="async" />
-      <span class="intro-loading">Preparing portfolio <strong id="introProgressText">0%</strong></span>
-    </div>
-  </div>
-  <div class="cursor-glow" aria-hidden="true"></div>
   <div class="cursor-ring" aria-hidden="true"></div>
   <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="theme-orbit-wash" aria-hidden="true"></div>
-  <div class="space-war" id="spaceWar" aria-hidden="true"></div>
-  <div class="player-ship" id="playerShip" aria-hidden="true"><span class="player-shield-barrier"></span></div>
-  <div class="fun-hint" aria-hidden="true">
-    <span class="desktop-copy">Press X for fun</span>
-    <span class="mobile-copy">Double tap for fun</span>
-  </div>
-  <div class="arena-hud" id="arenaHud" aria-hidden="true">
-    <span id="arenaStatus">Arena ready</span>
-    <span id="bossStatus">Boss: waiting</span>
-  </div>
-  <div class="game-hud-panel" id="gameHudPanel" aria-hidden="true">
-    <div class="ship-counter" id="shipCounter">SCORE 00000</div>
-    <div class="hud-line"><span>Level</span><strong id="levelStatus">1</strong></div>
-    <div class="hud-line"><span>Kills</span><strong id="killsStatus">0</strong></div>
-    <div class="hud-line"><span>HP</span><strong id="healthStatus">100</strong></div>
-    <div class="hud-bar"><span id="healthBar"></span></div>
-    <div class="hud-line"><span>Shield</span><strong id="shieldStatus">0</strong></div>
-    <div class="hud-bar shield"><span id="shieldBar"></span></div>
-    <div class="powerup-status" id="powerupStatus">Base blaster</div>
-  </div>
-  <div class="scroll-lock-warning" id="scrollLockWarning" aria-hidden="true">Please end the game session to continue exploring the website</div>
-  <div class="game-over-backdrop" id="gameOverBackdrop" aria-hidden="true"></div>
-  <div class="game-over-panel" id="gameOverPanel" role="dialog" aria-modal="false" aria-hidden="true">
-    <button class="game-over-close interactive" id="closeGameOverBtn" type="button" aria-label="Close game over popup">×</button>
-    <h2>Game over</h2>
-    <p>Your ship took critical damage, but the run looked good. Try again from level 1, or turn that arcade energy into a real project request.</p>
-    <button class="try-again-btn interactive" id="tryAgainBtn" type="button">Try again</button>
-    <button class="game-request-btn interactive" id="gameRequestBtn" type="button">Request a project</button>
-  </div>
-  <div class="level-transition-panel" id="levelTransitionPanel" aria-hidden="true">
-    <small id="levelTransitionKicker">Level 1</small>
-    <h2 id="levelTransitionTitle">Incoming wave</h2>
-    <p id="levelTransitionText">Clear the hostile ships and keep your HP above zero.</p>
-    <button class="try-again-btn interactive" id="levelRestartBtn" type="button">Play again</button>
-  </div>
+  <div class="grain" aria-hidden="true"></div>
 
-  <main class="page">
-    <nav class="nav reveal interactive">
-      <a class="brand" href="#top" aria-label="Go to top">
-        <img class="brand-img theme-portrait" id="brandPortrait" src="assets/ezz-profile-dark.jpg" data-dark-src="assets/ezz-profile-dark.jpg" data-light-src="assets/ezz-profile-light.jpg" alt="Ezz Tantawy" decoding="async" fetchpriority="high" />
-        <span>Ezz Tantawy</span>
-      </a>
-      <div class="nav-links" aria-label="Main navigation">
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#process">Process</a>
-        <button class="play-mode-btn interactive" id="playModeBtn" type="button">Play</button>
-        <button class="restore-world-btn interactive" id="restoreWorldBtn" type="button">Restore</button>
-      </div>
-      <div class="nav-actions">
-        <button class="sound-toggle interactive" id="soundToggle" type="button" aria-label="Mute sound" aria-pressed="false" title="Mute sound">
-          <span class="sound-icon" aria-hidden="true">
-            <span class="sound-wave"></span>
-            <span class="sound-slash"></span>
-          </span>
-        </button>
-        <button class="theme-switch interactive" id="themeSwitch" type="button" aria-label="Switch to light mode" aria-pressed="false">
-          <span class="theme-switch-icon" aria-hidden="true"></span>
-          <span class="theme-switch-text">Dark</span>
-          <span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span>
-        </button>
-        <a class="nav-cta interactive" href="#request">Request</a>
+  <main class="page" id="top">
+    <nav class="nav reveal visible">
+      <div class="site-shell nav-inner">
+        <a class="brand interactive" href="#top">Islam Ali</a>
+        <div class="nav-links" aria-label="Primary navigation">
+          <a class="interactive" href="#about">About</a>
+          <a class="interactive" href="#work">Work</a>
+          <a class="interactive" href="#process">Process</a>
+          <button class="play-mode-btn interactive" type="button">Play</button>
+          <button class="theme-switch interactive" type="button" aria-label="Toggle color theme">
+            <span class="theme-track"><span class="theme-thumb"></span></span>
+            <span class="theme-label">Dark</span>
+          </button>
+          <a class="nav-cta interactive" href="#request">Request</a>
+        </div>
       </div>
     </nav>
 
-    <header id="top" class="hero">
-      <aside class="hero-photo reveal interactive">
-        <img class="theme-portrait" id="heroPortrait" src="assets/ezz-profile-dark.jpg" data-dark-src="assets/ezz-profile-dark.jpg" data-light-src="assets/ezz-profile-light.jpg" alt="Portrait of Ezz Tantawy" decoding="async" fetchpriority="high" />
-        <div class="photo-tags">
-          <span>Video Editor</span>
-          <span>3D Artist</span>
-          <span>AI Video Creator</span>
+    <div class="site-shell hero">
+      <aside class="hero-photo reveal visible interactive">
+        <div class="portrait">
+          <div class="role-stack">
+            <span>Video Editor</span>
+            <span>Colorist</span>
+            <span>Visual Storyteller</span>
+          </div>
+        </div>
+        <div class="metrics">
+          <div class="metric interactive"><strong>EDIT</strong><span>Reels, campaigns, brand videos, and social-first cuts.</span></div>
+          <div class="metric interactive"><strong>COLOR</strong><span>Correction, grading, skin tones, mood, and visual consistency.</span></div>
+          <div class="metric interactive"><strong>CAI</strong><span>Based in Cairo with 3 years of professional experience.</span></div>
         </div>
       </aside>
 
-      <section class="hero-copy reveal interactive" aria-label="Portfolio intro">
-        <div class="circle-line"></div>
-        <div class="hero-content">
-          <div class="eyebrow"><span class="dot"></span> Motion - 3D - AI Visuals</div>
-          <h1>Turning brand ideas into visuals<br><em>Built to stand out.</em></h1>
-          <p class="hero-desc">
-            I help brands elevate how they present themselves through cinematic editing, immersive 3D visualization, and AI-assisted motion, creating visuals that feel sharp, memorable, and ready for modern audiences.
-          </p>
-
-          <div class="role-strip">
-            <div class="role-card" style="--r:-2deg"><strong>Video editing</strong><i></i></div>
-            <div class="role-card" style="--r:1.5deg"><strong>3D animation</strong><i></i></div>
-            <div class="role-card" style="--r:-1.3deg"><strong>3D modeling</strong><i></i></div>
-            <div class="role-card" style="--r:1.9deg"><strong>AI video editing</strong><i></i></div>
-            <div class="role-card" style="--r:-2.2deg"><strong>Graphic design</strong><i></i></div>
-            <div class="role-card" style="--r:1.1deg"><strong>Videography</strong><i></i></div>
-          </div>
-
-          <div class="actions">
-            <a class="btn btn-dark interactive" href="#work">Explore Projects</a>
-            <a class="btn btn-light interactive" href="#request">Start a Project</a>
-          </div>
+      <section class="hero-copy reveal visible interactive">
+        <p class="eyebrow">Hi, I'm Islam / Editor & Colorist</p>
+        <h1>Turning visions into visuals that feel cinematic.</h1>
+        <p>
+          Based in Cairo, I bring a decade of passion and 3 years of professional expertise to the editing suite. As a colorist and editor, I do not just cut clips - I build atmospheres, making every project as narratively powerful as it is visually stunning.
+        </p>
+        <div class="role-grid" aria-label="Creative services">
+          <span class="role-card interactive" style="--tilt:-2deg">Video editing</span>
+          <span class="role-card interactive" style="--tilt:1.5deg">Color grading</span>
+          <span class="role-card interactive" style="--tilt:-1.3deg">Color correction</span>
+          <span class="role-card interactive" style="--tilt:1.9deg">Campaign content</span>
+          <span class="role-card interactive" style="--tilt:-2.2deg">Reel editing</span>
+          <span class="role-card interactive" style="--tilt:1.1deg">Visual storytelling</span>
         </div>
-
-        <div class="hero-bottom">
-          <div class="metrics">
-            <div class="metric interactive"><strong>3D</strong><span>Spatial visualization, branded interiors, modeling, rendering, and presentation films.</span></div>
-            <div class="metric interactive"><strong>EDIT</strong><span>Fast-turnaround reels, campaign content, corporate stories, and social-first edits.</span></div>
-            <div class="metric interactive"><strong>AI</strong><span>ComfyUI, image-to-video workflows, prompt planning, and cinematic AI animation.</span></div>
-          </div>
+        <div class="cta-row">
+          <a class="btn primary interactive" href="#work">Explore Projects</a>
+          <a class="btn interactive" href="#request">Start a Project</a>
         </div>
       </section>
-    </header>
+    </div>
 
     <section id="about">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">About</div>
-          <h2>A creator who can move from idea to visual proof fast.</h2>
+      <div class="site-shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="kicker">About</p>
+            <h2>A creator who can move from raw footage to finished feeling fast.</h2>
+          </div>
+          <p>
+            My work is focused on turning ideas and footage into visually stunning stories, combining editing, color, rhythm, and atmosphere so every project feels clear, cinematic, and emotionally intentional.
+          </p>
         </div>
-        <p>
-          From edited reels to immersive 3D previews and AI-driven motion, my work is focused on helping brands communicate ideas with clarity, speed, and a distinctive visual presence.
-        </p>
-      </div>
 
-      <div class="about-grid">
-        <article class="panel light reveal interactive">
-          <h3>Creative positioning</h3>
-          <p>
-            My work connects practical editing, 3D production, design thinking, and AI experimentation. The goal is not just to make something look good, but to turn rough briefs, references, and raw material into visuals that make a client understand the value immediately.
-          </p>
-          <div class="chips">
-            <span class="chip">Premiere Pro</span>
-            <span class="chip">After Effects</span>
-            <span class="chip">Blender</span>
-            <span class="chip">Photoshop</span>
-            <span class="chip">ComfyUI</span>
-            <span class="chip">AI Video</span>
-            <span class="chip">Motion Design</span>
-          </div>
-        </article>
-
-        <article class="panel reveal interactive">
-          <h3>Selected work preview</h3>
-          <p>
-            Below are selected samples across 3D visualization, video editing, and AI-powered animation. Some client work is shown in a limited way due to confidentiality, but each sample reflects the creative approach, speed, and production value behind the project.
-          </p>
-          <div class="chips">
-            <span class="chip">3D Visualization</span>
-            <span class="chip">Reel Editing</span>
-            <span class="chip">AI Animation</span>
-            <span class="chip">Client Work</span>
-            <span class="chip">Fast Delivery</span>
-          </div>
-        </article>
-
-        <article class="panel current-position-panel reveal interactive">
-          <h3>Current position</h3>
-          <p>
-            I am currently part of the media coverage team at Teleperformance Egypt, supporting visual production across videography, photography, video editing, photo editing, 3D visualization, and VFX work.
-          </p>
-          <div class="chips">
-            <span class="chip">Teleperformance Egypt</span>
-            <span class="chip">Media Coverage</span>
-            <span class="chip">Videography</span>
-            <span class="chip">Photography</span>
-            <span class="chip">Video Editing</span>
-            <span class="chip">Photo Editing</span>
-            <span class="chip">3D Visualization</span>
-            <span class="chip">VFX</span>
-          </div>
-        </article>
+        <div class="about-grid">
+          <article class="panel reveal interactive">
+            <h3>Creative positioning</h3>
+            <p>
+              I connect practical editing, color grading, visual rhythm, and storytelling. The goal is not just to make something look good - it is to shape footage into a complete atmosphere that carries the message and keeps the viewer inside the story.
+            </p>
+            <div class="chip-cloud">
+              <span class="chip interactive">Premiere Pro</span>
+              <span class="chip interactive">After Effects</span>
+              <span class="chip interactive">DaVinci Resolve</span>
+              <span class="chip interactive">Photoshop</span>
+              <span class="chip interactive">Color Grading</span>
+              <span class="chip interactive">Editing</span>
+              <span class="chip interactive">Visual Storytelling</span>
+            </div>
+          </article>
+          <article class="panel reveal interactive">
+            <h3>Selected work preview</h3>
+            <p>
+              Selected samples can cover editing, color grading, campaigns, reels, and narrative video work. Each sample should show the creative approach, pacing, mood, role, and final delivery format behind the project.
+            </p>
+            <div class="chip-cloud">
+              <span class="chip interactive">Reel Editing</span>
+              <span class="chip interactive">Campaigns</span>
+              <span class="chip interactive">Color Direction</span>
+              <span class="chip interactive">Client Work</span>
+              <span class="chip interactive">Fast Delivery</span>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
     <section id="work">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">Selected work</div>
-          <h2>Multidisciplinary work across motion, space, and AI.</h2>
-        </div>
-        <p class="work-access-note">
-          Tap or press any project card to open the full case view, including the story, role, tools, edits, videos, and selected media samples.
-        </p>
-      </div>
-
-      <div class="tabs-shell reveal interactive">
-        <div class="tab-row" role="tablist" aria-label="Portfolio categories">
-          <button class="tab-btn active" type="button" data-tab="editing" role="tab" aria-selected="true">Video Editing</button>
-          <button class="tab-btn" type="button" data-tab="threeD" role="tab" aria-selected="false">3D Animation & Rendering</button>
-          <button class="tab-btn" type="button" data-tab="ai" role="tab" aria-selected="false">AI Video Editing</button>
+      <div class="site-shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="kicker">Selected work</p>
+            <h2>Focused work across editing, color, and story.</h2>
+          </div>
+          <p>
+            Tap or press any project card to open the full case view, including the story, role, tools, and production approach.
+          </p>
         </div>
 
-        <div class="tab-content active" id="editing" role="tabpanel">
-          <div class="gallery-head">
-            <div><h3>Fast edits built for real deadlines.</h3></div>
-            <p>Reels, channel work, and corporate media edits designed to publish cleanly, move quickly, and keep the story clear.</p>
-          </div>
-          <div class="carousel-wrap">
-            <div class="project-track" data-category="editing"></div>
-            <div class="carousel-actions"><button class="arrow-btn" data-scroll="editing" data-dir="-1" aria-label="Scroll editing projects left">&lt;</button><button class="arrow-btn" data-scroll="editing" data-dir="1" aria-label="Scroll editing projects right">&gt;</button></div>
-          </div>
+        <p class="work-access-note reveal">Choose a category, then open a project card for a richer breakdown.</p>
+        <div class="tabs-shell reveal interactive" role="tablist" aria-label="Project categories">
+          <button class="tab-btn active" type="button" data-tab="editing">Video Editing</button>
+          <button class="tab-btn" type="button" data-tab="color">Color Grading</button>
+          <button class="tab-btn" type="button" data-tab="story">Visual Storytelling</button>
         </div>
 
-        <div class="tab-content" id="threeD" role="tabpanel">
-          <div class="gallery-head">
-            <div><h3>Spatial stories from plan to rendered reality.</h3></div>
-            <p>3D projects focused on visualizing spaces, brands, and experiences before they physically exist.</p>
-          </div>
-          <div class="carousel-wrap">
-            <div class="project-track" data-category="threeD"></div>
-            <div class="carousel-actions"><button class="arrow-btn" data-scroll="threeD" data-dir="-1" aria-label="Scroll 3D projects left">&lt;</button><button class="arrow-btn" data-scroll="threeD" data-dir="1" aria-label="Scroll 3D projects right">&gt;</button></div>
-          </div>
-        </div>
+        <div class="project-stage">
+          <div class="project-track active" data-track="editing">
+            <button class="project-card interactive" type="button" data-title="Campaign Reel Edit" data-category="Video Editing" data-role="Editor" data-tools="Premiere Pro, After Effects" data-year="2026" data-summary="A campaign-style reel shaped for pace, clarity, and publish-ready impact." data-breakdown="Built around quick viewer understanding, clean rhythm, and a strong hook. The edit balances branded moments, music accents, and sharp transitions without losing the message." style="--image:url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1000&q=82')">
+              <span class="press-label">Press to explore</span>
+              <div class="project-body">
+                <div class="project-tag">Video Editing</div>
+                <h3>Campaign reels built for real attention.</h3>
+                <p>Short-form edits shaped around timing, clarity, and a strong first impression.</p>
+                <div class="project-meta"><span>Reel edit</span><span>2026</span><span>Campaign</span></div>
+              </div>
+            </button>
 
-        <div class="tab-content" id="ai" role="tabpanel">
-          <div class="gallery-head">
-            <div><h3>Experimental AI motion with production intent.</h3></div>
-            <p>Image-to-video workflows, ComfyUI systems, and AI animation pieces refined through planning and post-production.</p>
+            <button class="project-card interactive" type="button" data-title="Social-first Brand Cut" data-category="Video Editing" data-role="Editor / Post-production" data-tools="Premiere Pro, Photoshop" data-year="2026" data-summary="A social-first brand cut designed to move fast while still feeling polished." data-breakdown="The structure keeps the strongest visuals close to the top, trims dead space, and uses music timing to make the final video feel confident and ready for distribution." style="--image:url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1000&q=82')">
+              <span class="press-label">Press to explore</span>
+              <div class="project-body">
+                <div class="project-tag">Video Editing</div>
+                <h3>Fast edits with a finished, branded feel.</h3>
+                <p>Social content shaped to be clear, dynamic, and easy to publish.</p>
+                <div class="project-meta"><span>Brand video</span><span>2026</span><span>Social</span></div>
+              </div>
+            </button>
+
+            <button class="project-card interactive" type="button" data-title="Urgent Promo Turnaround" data-category="Video Editing" data-role="Editor" data-tools="Premiere Pro, After Effects" data-year="2026" data-summary="A fast promo edit built under deadline pressure." data-breakdown="The goal was to deliver a direct, high-energy promo without making the timeline feel rushed. The result focuses on readable information, clean pacing, and a strong ending." style="--image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1000&q=82')">
+              <span class="press-label">Press to explore</span>
+              <div class="project-body">
+                <div class="project-tag">Video Editing</div>
+                <h3>Urgent promos without losing polish.</h3>
+                <p>Deadline-friendly editing that keeps the message sharp and usable.</p>
+                <div class="project-meta"><span>Promo</span><span>Fast delivery</span><span>Post</span></div>
+              </div>
+            </button>
           </div>
-          <div class="carousel-wrap">
-            <div class="project-track" data-category="ai"></div>
-            <div class="carousel-actions"><button class="arrow-btn" data-scroll="ai" data-dir="-1" aria-label="Scroll AI projects left">&lt;</button><button class="arrow-btn" data-scroll="ai" data-dir="1" aria-label="Scroll AI projects right">&gt;</button></div>
+
+          <div class="project-track" data-track="color">
+            <button class="project-card interactive" type="button" data-title="Cinematic Color Pass" data-category="Color Grading" data-role="Colorist" data-tools="DaVinci Resolve" data-year="2026" data-summary="A cinematic grade focused on mood, contrast, and skin tone balance." data-breakdown="The grade starts with a clean correction pass, then shapes contrast and warmth to support the emotional tone. Skin stays natural while the frame gets a stronger visual identity." style="--image:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1000&q=82')">
+              <span class="press-label">Press to explore</span>
+              <div class="project-body">
+                <div class="project-tag">Color Grading</div>
+                <h3>Atmosphere shaped through color and contrast.</h3>
+                <p>Color work focused on mood, tone, skin, and cinematic consistency.</p>
+                <div class="project-meta"><span>Grade</span><span>Look dev</span><span>DaVinci</span></div>
+              </div>
+            </button>
+
+            <button class="project-card interactive" type="button" data-title="Raw Footage Correction" data-category="Color Correction" data-role="Colorist" data-tools="DaVinci Resolve, Premiere Pro" data-year="2026" data-summary="A correction pass that turns flat footage into clean, balanced visuals." data-breakdown="Exposure, white balance, and contrast are corrected first, then the image is shaped into a cleaner look that can hold up across a full edit." style="--image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=82')">
+              <span class="press-label">Press to explore</span>
+              <div class="project-body">
+                <div class="project-tag">Color Correction</div>
+                <h3>Raw-looking footage cleaned and balanced.</h3>
+                <p>Correction work that gives the edit a stable visual foundation.</p>
+                <div class="project-meta"><span>Correction</span><span>Balance</span><span>Skin tones</span></div>
+              </div>
+            </button>
+
+            <button class="project-card interactive" type="button" data-title="Brand Color Direction" data-category="Color Grading" data-role="Colorist / Editor" data-tools="DaVinci Resolve, Premiere Pro" data-year="2026" data-summary="A color direction pass built to keep a brand video visually consistent." data-breakdown="The grade uses controlled contrast and warm highlights to keep the brand feeling polished, while matching shots so the full piece feels like one visual world." style="--image:url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=82')">
+              <span class="press-label">Press to explore</span>
+              <div class="project-body">
+                <div class="project-tag">Color Direction</div>
+                <h3>A consistent look across every frame.</h3>
+                <p>Shot matching and visual direction for polished brand content.</p>
+                <div class="project-meta"><span>Brand</span><span>Color</span><span>Consistency</span></div>
+              </div>
+            </button>
+          </div>
+
+          <div class="project-track" data-track="story">
+            <button class="project-card interactive" type="button" data-title="Narrative YouTube Edit" data-category="Visual Storytelling" data-role="Editor" data-tools="Premiere Pro, After Effects" data-year="Ongoing" data-summary="Narrative editing for structured, watchable YouTube content." data-breakdown="The edit focuses on structure, pacing, retention, and emotional flow. Each section is shaped so the viewer understands the point quickly and stays connected to the story." style="--image:url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1000&q=82')">
+              <span class="press-label">Press to explore</span>
+              <div class="project-body">
+                <div class="project-tag">Visual Storytelling</div>
+                <h3>Narrative edits with emotional direction.</h3>
+                <p>Longer edits shaped around structure, clarity, and viewer retention.</p>
+                <div class="project-meta"><span>YouTube</span><span>Story</span><span>Ongoing</span></div>
+              </div>
+            </button>
+
+            <button class="project-card interactive" type="button" data-title="Mood-driven Sequence" data-category="Visual Storytelling" data-role="Editor / Colorist" data-tools="Premiere Pro, DaVinci Resolve" data-year="2026" data-summary="A sequence built to carry atmosphere through pacing and color." data-breakdown="The storytelling comes from the order of shots, the rhythm of cuts, and the color choices. The final piece aims to feel intentional, not just assembled." style="--image:url('https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1000&q=82')">
+              <span class="press-label">Press to explore</span>
+              <div class="project-body">
+                <div class="project-tag">Mood Building</div>
+                <h3>Sequences that feel designed, not assembled.</h3>
+                <p>Atmosphere built through shot order, movement, music, and grade.</p>
+                <div class="project-meta"><span>Mood</span><span>Edit</span><span>Grade</span></div>
+              </div>
+            </button>
+
+            <button class="project-card interactive" type="button" data-title="Client Story Package" data-category="Visual Storytelling" data-role="Editor / Post-production" data-tools="Premiere Pro, After Effects, Photoshop" data-year="2026" data-summary="A client-ready story package prepared for multiple platforms." data-breakdown="The package turns raw material into a set of clear deliverables, with strong pacing, consistent color, and versions that can work across social and presentation formats." style="--image:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=82')">
+              <span class="press-label">Press to explore</span>
+              <div class="project-body">
+                <div class="project-tag">Client Work</div>
+                <h3>Stories packaged for modern platforms.</h3>
+                <p>Client-ready edits prepared with pace, color, and delivery in mind.</p>
+                <div class="project-meta"><span>Client</span><span>Delivery</span><span>Platforms</span></div>
+              </div>
+            </button>
           </div>
         </div>
       </div>
     </section>
 
     <section id="process">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">Process</div>
-          <h2>Not just output - a visual system.</h2>
+      <div class="site-shell">
+        <div class="section-head reveal">
+          <div>
+            <p class="kicker">Process</p>
+            <h2>Not just output - a visual system.</h2>
+          </div>
+          <p>
+            Every project can be framed as a clean case study: objective, edit route, color direction, and final delivery.
+          </p>
         </div>
-        <p>Every project can be framed as a clean case study: problem, approach, execution, and final result.</p>
-      </div>
-      <div class="process-grid">
-        <article class="process-card reveal interactive" data-step="01"><h3>Decode the brief</h3><p>Clarify what the project must achieve and what the viewer should understand quickly.</p></article>
-        <article class="process-card reveal interactive" data-step="02"><h3>Build the visual route</h3><p>Define pacing, composition, references, assets, prompts, camera language, and delivery format.</p></article>
-        <article class="process-card reveal interactive" data-step="03"><h3>Produce with speed</h3><p>Edit, render, generate, composite, and test multiple routes without losing the core objective.</p></article>
-        <article class="process-card reveal interactive" data-step="04"><h3>Package the result</h3><p>Deliver visuals in a way that feels sharp, client-ready, and easy to use across platforms.</p></article>
+
+        <div class="process-grid">
+          <article class="process-card reveal interactive">
+            <h3>Decode the brief</h3>
+            <p>Clarify the audience, message, platform, deadline, and emotional tone.</p>
+          </article>
+          <article class="process-card reveal interactive">
+            <h3>Build the edit route</h3>
+            <p>Define pacing, music, sequence structure, references, hooks, and delivery format.</p>
+          </article>
+          <article class="process-card reveal interactive">
+            <h3>Shape the color</h3>
+            <p>Correct, balance, grade, match shots, and build a look that supports the story.</p>
+          </article>
+          <article class="process-card reveal interactive">
+            <h3>Package the result</h3>
+            <p>Deliver clean versions that feel client-ready and easy to use across platforms.</p>
+          </article>
+        </div>
       </div>
     </section>
 
     <section id="request">
-      <div class="section-head reveal">
-        <div>
-          <div class="kicker">Project request</div>
-          <h2>A quick way to start the right conversation.</h2>
+      <div class="site-shell">
+        <div class="request-card reveal interactive">
+          <div>
+            <p class="kicker">Request</p>
+            <h2>Start with the type of visual you need.</h2>
+            <p class="request-copy">
+              Pick the closest service, add a short note, then send it by email. The message will open with the project type already included.
+            </p>
+            <div class="choice-grid" aria-label="Project type">
+              <button class="choice-btn active interactive" type="button" data-choice="Video Editing">Video Editing</button>
+              <button class="choice-btn interactive" type="button" data-choice="Color Grading">Color Grading</button>
+              <button class="choice-btn interactive" type="button" data-choice="Full Post-production">Full Post-production</button>
+            </div>
+          </div>
+
+          <form class="request-form">
+            <label class="field">
+              Your name
+              <input name="name" placeholder="Name or brand" />
+            </label>
+            <label class="field">
+              Project note
+              <textarea name="message" placeholder="Tell me about the footage, deadline, platform, and style."></textarea>
+            </label>
+            <button class="btn primary interactive send-request" type="submit">Send request</button>
+          </form>
         </div>
-        <p>Choose the type of work you need, refine the request, and the site prepares a Gmail or Outlook compose window with a clear subject and editable project intro.</p>
       </div>
+    </section>
 
-      <div class="request-card reveal interactive" id="requestTool" aria-label="Project request tool">
-        <div class="request-start">
-          <button class="request-main-btn interactive" id="makeRequestBtn" type="button">Make a request</button>
-          <p class="request-microcopy">One click starts the flow. Pick a project lane, choose the exact request, adjust the prepared note if needed, then send it through Gmail or Outlook.</p>
-        </div>
-
-        <div class="request-choices" id="requestChoices" aria-hidden="true">
-          <button class="choice-btn interactive" type="button" data-category="threeD">3D Modeling & Visualization</button>
-          <button class="choice-btn interactive" type="button" data-category="editing">Video Editing</button>
-          <button class="choice-btn interactive" type="button" data-category="longTerm">Long-Term Project Request</button>
-        </div>
-
-        <div class="request-subchoices" id="requestSubChoices" aria-hidden="true">
-          <div class="request-step-label" id="requestSubLabel">Choose a focus</div>
-        </div>
-
-        <div class="request-form" id="requestForm" aria-hidden="true">
-          <label class="request-field">
-            Selected request
-            <select id="requestTypeSelect">
-              <optgroup label="3D Modeling & Visualization">
-                <option value="3D Modeling & Visualization - Interior Design">Interior Design Visualization</option>
-                <option value="3D Modeling & Visualization - Product Visualization">Product Visualization</option>
-                <option value="3D Modeling & Visualization - 3D Animation">3D Animation</option>
-              </optgroup>
-              <optgroup label="Video Editing">
-                <option value="Video Editing - Short-Form Reel Editing">Short-Form Reel Editing</option>
-                <option value="Video Editing - Long-Form Video Editing">Long-Form Video Editing</option>
-                <option value="Video Editing - Motion Design">Motion Design</option>
-              </optgroup>
-              <optgroup label="Long-Term Project Request">
-                <option value="Long-Term Project Request - 1-3 Months">1-3 Months</option>
-                <option value="Long-Term Project Request - 3-6 Months">3-6 Months</option>
-                <option value="Long-Term Project Request - 6+ Months">6+ Months</option>
-              </optgroup>
-            </select>
-          </label>
-
-          <label class="request-field">
-            Additional details
-            <textarea id="requestDetails" placeholder="A short project intro will appear here after you choose a request focus. You can edit it, add details, or clear it before sending."></textarea>
-          </label>
-
-          <p class="request-helper">The email subject and message intro update from the selected focus. You can edit the text before choosing Gmail or Outlook.</p>
-          <button class="send-request interactive" id="sendRequestBtn" type="button"><span>Send request</span></button>
-          <div class="mail-options" id="mailOptions" aria-hidden="true" aria-label="Choose email provider">
-            <button class="mail-option interactive" type="button" data-provider="gmail">Gmail</button>
-            <button class="mail-option interactive" type="button" data-provider="outlook">Outlook</button>
+    <section id="contact">
+      <div class="site-shell">
+        <div class="contact-card reveal interactive">
+          <div>
+            <p class="kicker">Contact</p>
+            <h2>Have footage that needs stronger rhythm or color?</h2>
+            <p class="contact-copy">
+              Reach out through Facebook, Instagram, WhatsApp, or email for editing, color grading, visual storytelling, campaign content, or creative video work.
+            </p>
+          </div>
+          <div class="contact-actions">
+            <a class="btn primary interactive" href="mailto:em99ve@gmail.com">Email</a>
+            <a class="btn interactive" href="https://www.facebook.com/elkinge99" target="_blank" rel="noreferrer">Facebook</a>
+            <a class="btn interactive" href="https://www.instagram.com/islam.m.aly" target="_blank" rel="noreferrer">Instagram</a>
+            <a class="btn interactive" href="https://api.whatsapp.com/send?phone=201069298477&text=Hi%20let%27s%20work%20together" target="_blank" rel="noreferrer">WhatsApp</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="contact-card reveal interactive">
-      <div>
-        <div class="kicker">Direct communication</div>
-        <h2>Prefer direct communication?</h2>
-        <p>I am available through the following contact channels for video editing, 3D visualization, branded content, and AI-assisted motion projects.</p>
-      </div>
-      <div class="contact-links">
-        <a class="contact-link interactive" href="mailto:contact@ezz-tantawy.org"><span>Email</span><span>contact@ezz-tantawy.org</span></a>
-        <a class="contact-link interactive" href="https://www.linkedin.com/in/ezeldeen-tantawy-785189240/" target="_blank" rel="noopener"><span>LinkedIn</span><span>ezeldeen-tantawy</span></a>
-        <a class="contact-link interactive" href="https://wa.me/201014419160" target="_blank" rel="noopener"><span>WhatsApp</span><span>+20 1014419160</span></a>
-        <a class="contact-link interactive" href="#" id="discordLink"><span>Discord</span><span>ezeldeentantawy</span></a>
-      </div>
-    </section>
-
     <footer>
-      <span>&copy; <span id="year"></span> Ezz Tantawy.</span>
-      <span>Video Editing - 3D Visualization - AI Video</span>
-      <span>This website was envisioned by Ezz-eldeen and built with the help of artificial intelligence.</span>
+      <div class="site-shell">Copyright <span id="year"></span> Islam Ali. Editing / Color Grading / Visual Storytelling</div>
     </footer>
   </main>
 
-  <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal-card interactive">
-      <button class="close-modal" type="button" aria-label="Close project viewer">&times;</button>
+  <div class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <article class="modal">
       <div class="modal-media">
-        <div class="stage" id="stage"></div>
-        <div class="media-tabs" id="mediaTabs"></div>
-        <div class="media-list" id="mediaList"></div>
-        <a class="open-external" id="openExternal" href="#" target="_blank" rel="noopener">Open current media externally</a>
+        <button class="close-modal interactive" type="button" aria-label="Close project view">X</button>
       </div>
-      <div class="modal-info">
-        <div class="modal-kicker" id="modalCategory"></div>
-        <h2 id="modalTitle"></h2>
-        <p id="modalDescription"></p>
-        <div class="info-grid" id="modalInfoGrid"></div>
-        <div class="highlights" id="modalHighlights"></div>
-        <button class="expand-btn" type="button" id="expandBtn">Show full breakdown</button>
-        <div class="breakdown" id="breakdown"></div>
+      <div class="modal-content">
+        <p class="kicker modal-category">Video Editing</p>
+        <h2 id="modal-title">Project title</h2>
+        <p class="contact-copy modal-summary">Project summary</p>
+        <div class="modal-grid">
+          <div class="breakdown">
+            <h3>Breakdown</h3>
+            <p class="modal-breakdown"></p>
+          </div>
+          <div class="fact-list">
+            <div class="fact"><strong>Role</strong><span class="modal-role"></span></div>
+            <div class="fact"><strong>Tools</strong><span class="modal-tools"></span></div>
+            <div class="fact"><strong>Year</strong><span class="modal-year"></span></div>
+          </div>
+        </div>
       </div>
-    </div>
+    </article>
   </div>
 
-  <div class="mail-confirmation" id="mailConfirmation" aria-hidden="true" role="dialog" aria-modal="false">
-    <div class="mail-confirmation-card">
-      <button class="mail-confirmation-close" id="mailConfirmationClose" type="button" aria-label="Close email confirmation">&times;</button>
-      <div class="kicker">Request prepared</div>
-      <h2>Confirm the email in the new tab or mail app.</h2>
-      <p id="mailConfirmationText">Your request draft has been opened. Review the message, then press send when you are ready.</p>
-    </div>
-  </div>
+  <script>
+    const body = document.body;
+    const year = document.querySelector("#year");
+    const themeButton = document.querySelector(".theme-switch");
+    const themeLabel = document.querySelector(".theme-label");
+    const playButton = document.querySelector(".play-mode-btn");
+    const ring = document.querySelector(".cursor-ring");
+    const dot = document.querySelector(".cursor-dot");
+    const modalBackdrop = document.querySelector(".modal-backdrop");
+    const modal = document.querySelector(".modal");
+    const modalMedia = document.querySelector(".modal-media");
+    const selectedChoice = { value: "Video Editing" };
 
-  <script src="app.js?v=20260605-color-grading-sample"></script>
+    year.textContent = new Date().getFullYear();
+
+    if (localStorage.getItem("theme") === "light") {
+      body.classList.add("light");
+      themeLabel.textContent = "Light";
+    }
+
+    themeButton.addEventListener("click", () => {
+      const isLight = body.classList.toggle("light");
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+      themeLabel.textContent = isLight ? "Light" : "Dark";
+    });
+
+    playButton.addEventListener("click", () => {
+      body.classList.toggle("fun-mode");
+      playButton.textContent = body.classList.contains("fun-mode") ? "Restore" : "Play";
+    });
+
+    if (matchMedia("(pointer:fine)").matches) {
+      window.addEventListener("pointermove", (event) => {
+        body.classList.add("cursor-ready");
+        ring.style.transform = `translate3d(${event.clientX - 17}px, ${event.clientY - 17}px, 0)`;
+        dot.style.transform = `translate3d(${event.clientX - 3}px, ${event.clientY - 3}px, 0)`;
+      });
+
+      document.addEventListener("mouseover", (event) => {
+        if (event.target.closest(".interactive, a, button")) body.classList.add("cursor-active");
+      });
+
+      document.addEventListener("mouseout", (event) => {
+        if (event.target.closest(".interactive, a, button")) body.classList.remove("cursor-active");
+      });
+    }
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
+
+    document.querySelectorAll(".tab-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach((tab) => tab.classList.remove("active"));
+        document.querySelectorAll(".project-track").forEach((track) => track.classList.remove("active"));
+        button.classList.add("active");
+        document.querySelector(`[data-track="${button.dataset.tab}"]`).classList.add("active");
+      });
+    });
+
+    document.querySelectorAll(".project-card").forEach((card) => {
+      card.addEventListener("click", () => openProject(card));
+    });
+
+    function openProject(card) {
+      const image = getComputedStyle(card).getPropertyValue("--image");
+      modalMedia.style.setProperty("--modal-image", image);
+      document.querySelector(".modal-category").textContent = card.dataset.category;
+      document.querySelector("#modal-title").textContent = card.dataset.title;
+      document.querySelector(".modal-summary").textContent = card.dataset.summary;
+      document.querySelector(".modal-breakdown").textContent = card.dataset.breakdown;
+      document.querySelector(".modal-role").textContent = card.dataset.role;
+      document.querySelector(".modal-tools").textContent = card.dataset.tools;
+      document.querySelector(".modal-year").textContent = card.dataset.year;
+      modalBackdrop.classList.add("open");
+      body.classList.add("modal-open");
+      document.querySelector(".close-modal").focus();
+    }
+
+    function closeProject() {
+      modalBackdrop.classList.remove("open");
+      body.classList.remove("modal-open");
+    }
+
+    document.querySelector(".close-modal").addEventListener("click", closeProject);
+    modalBackdrop.addEventListener("click", (event) => {
+      if (!modal.contains(event.target)) closeProject();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modalBackdrop.classList.contains("open")) closeProject();
+    });
+
+    document.querySelectorAll(".choice-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".choice-btn").forEach((choice) => choice.classList.remove("active"));
+        button.classList.add("active");
+        selectedChoice.value = button.dataset.choice;
+      });
+    });
+
+    document.querySelector(".request-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const name = data.get("name") || "New client";
+      const message = data.get("message") || "I want to discuss a project.";
+      const subject = encodeURIComponent(`${selectedChoice.value} request from ${name}`);
+      const bodyText = encodeURIComponent(`Project type: ${selectedChoice.value}\nName: ${name}\n\n${message}`);
+      window.location.href = `mailto:em99ve@gmail.com?subject=${subject}&body=${bodyText}`;
+    });
+  </script>
 </body>
 </html>
