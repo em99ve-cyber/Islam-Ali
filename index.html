@@ -1,90 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Islam Ali | Portfolio</title>
-    <!-- ربط ملف التصميم بتاعك -->
-    <link rel="stylesheet" href="style.css">
-    <!-- مكتبة خطوط جوجل ومكتبة الأيقونات اللي عز مستخدمها -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ezz Tantawy | Creative Portfolio</title>
+  <meta name="description" content="Creative portfolio for Ezz Tantawy: video editing, 3D visualization, rendering, and AI-assisted video production." />
+  <link rel="icon" type="image/png" href="assets/ezz-favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preload" as="image" href="assets/ezz-profile-dark.jpg" />
+  <link rel="preload" as="image" href="assets/ezz-profile-light.jpg" />
+  <link rel="preload" as="image" href="assets/project-plains-youtube-channel.jpg" />
+  <link rel="preload" as="image" href="assets/project-teleperformance-media-coverage.jpg" />
+  <link rel="preload" as="image" href="assets/project-tamatem-heroes-land-ad.jpg" />
+  <link rel="preload" as="image" href="assets/project-color-grading-raw-footage.jpg" />
+  <link rel="preload" as="image" href="assets/project-urgent-course-reel.jpg" />
+  <link rel="preload" as="image" href="assets/project-waraha-hekaya-editor.jpg" />
+  <link rel="preload" as="image" href="assets/project-automotive-service-center.jpg" />
+  <link rel="preload" as="image" href="assets/project-apartment-visualization.jpg" />
+  <link rel="preload" as="image" href="assets/project-apartment-floor-plan-visualization.jpg" />
+  <link rel="preload" as="image" href="assets/project-comfyui-ai-animation.jpg" />
+  <link rel="preload" as="image" href="assets/project-ai-building-vfx-animation.jpg" />
+  <link rel="stylesheet" href="styles.css?v=20260605-color-grading-sample" />
 </head>
 <body>
+  <div class="intro-screen" id="introScreen" aria-hidden="true">
+    <div class="intro-core">
+      <span class="intro-progress-ring" aria-hidden="true"></span>
+      <span class="intro-orbit intro-orbit-a" aria-hidden="true"></span>
+      <span class="intro-orbit intro-orbit-b" aria-hidden="true"></span>
+      <span class="intro-orbit intro-orbit-c" aria-hidden="true"></span>
+      <img class="theme-portrait" src="assets/ezz-profile-dark.jpg" data-dark-src="assets/ezz-profile-dark.jpg" data-light-src="assets/ezz-profile-light.jpg" alt="" decoding="async" />
+      <span class="intro-loading">Preparing portfolio <strong id="introProgressText">0%</strong></span>
+    </div>
+  </div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="theme-orbit-wash" aria-hidden="true"></div>
+  <div class="space-war" id="spaceWar" aria-hidden="true"></div>
+  <div class="player-ship" id="playerShip" aria-hidden="true"><span class="player-shield-barrier"></span></div>
+  <div class="fun-hint" aria-hidden="true">
+    <span class="desktop-copy">Press X for fun</span>
+    <span class="mobile-copy">Double tap for fun</span>
+  </div>
+  <div class="arena-hud" id="arenaHud" aria-hidden="true">
+    <span id="arenaStatus">Arena ready</span>
+    <span id="bossStatus">Boss: waiting</span>
+  </div>
+  <div class="game-hud-panel" id="gameHudPanel" aria-hidden="true">
+    <div class="ship-counter" id="shipCounter">SCORE 00000</div>
+    <div class="hud-line"><span>Level</span><strong id="levelStatus">1</strong></div>
+    <div class="hud-line"><span>Kills</span><strong id="killsStatus">0</strong></div>
+    <div class="hud-line"><span>HP</span><strong id="healthStatus">100</strong></div>
+    <div class="hud-bar"><span id="healthBar"></span></div>
+    <div class="hud-line"><span>Shield</span><strong id="shieldStatus">0</strong></div>
+    <div class="hud-bar shield"><span id="shieldBar"></span></div>
+    <div class="powerup-status" id="powerupStatus">Base blaster</div>
+  </div>
+  <div class="scroll-lock-warning" id="scrollLockWarning" aria-hidden="true">Please end the game session to continue exploring the website</div>
+  <div class="game-over-backdrop" id="gameOverBackdrop" aria-hidden="true"></div>
+  <div class="game-over-panel" id="gameOverPanel" role="dialog" aria-modal="false" aria-hidden="true">
+    <button class="game-over-close interactive" id="closeGameOverBtn" type="button" aria-label="Close game over popup">×</button>
+    <h2>Game over</h2>
+    <p>Your ship took critical damage, but the run looked good. Try again from level 1, or turn that arcade energy into a real project request.</p>
+    <button class="try-again-btn interactive" id="tryAgainBtn" type="button">Try again</button>
+    <button class="game-request-btn interactive" id="gameRequestBtn" type="button">Request a project</button>
+  </div>
+  <div class="level-transition-panel" id="levelTransitionPanel" aria-hidden="true">
+    <small id="levelTransitionKicker">Level 1</small>
+    <h2 id="levelTransitionTitle">Incoming wave</h2>
+    <p id="levelTransitionText">Clear the hostile ships and keep your HP above zero.</p>
+    <button class="try-again-btn interactive" id="levelRestartBtn" type="button">Play again</button>
+  </div>
 
-    <!-- الهيدر الشفاف الفخم بتاع موقع عز -->
-    <header>
-        <div class="logo">ISLAM ALI<span class="dot">.</span></div>
-        <nav>
-            <a href="#work">Work</a>
-            <a href="#about">About</a>
-            <a href="#contact" class="nav-cta">Start a Project</a>
-        </nav>
+  <main class="page">
+    <nav class="nav reveal interactive">
+      <a class="brand" href="#top" aria-label="Go to top">
+        <img class="brand-img theme-portrait" id="brandPortrait" src="assets/ezz-profile-dark.jpg" data-dark-src="assets/ezz-profile-dark.jpg" data-light-src="assets/ezz-profile-light.jpg" alt="Ezz Tantawy" decoding="async" fetchpriority="high" />
+        <span>Ezz Tantawy</span>
+      </a>
+      <div class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <button class="play-mode-btn interactive" id="playModeBtn" type="button">Play</button>
+        <button class="restore-world-btn interactive" id="restoreWorldBtn" type="button">Restore</button>
+      </div>
+      <div class="nav-actions">
+        <button class="sound-toggle interactive" id="soundToggle" type="button" aria-label="Mute sound" aria-pressed="false" title="Mute sound">
+          <span class="sound-icon" aria-hidden="true">
+            <span class="sound-wave"></span>
+            <span class="sound-slash"></span>
+          </span>
+        </button>
+        <button class="theme-switch interactive" id="themeSwitch" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="theme-switch-icon" aria-hidden="true"></span>
+          <span class="theme-switch-text">Dark</span>
+          <span class="theme-switch-track" aria-hidden="true"><span class="theme-switch-thumb"></span></span>
+        </button>
+        <a class="nav-cta interactive" href="#request">Request</a>
+      </div>
+    </nav>
+
+    <header id="top" class="hero">
+      <aside class="hero-photo reveal interactive">
+        <img class="theme-portrait" id="heroPortrait" src="assets/ezz-profile-dark.jpg" data-dark-src="assets/ezz-profile-dark.jpg" data-light-src="assets/ezz-profile-light.jpg" alt="Portrait of Ezz Tantawy" decoding="async" fetchpriority="high" />
+        <div class="photo-tags">
+          <span>Video Editor</span>
+          <span>3D Artist</span>
+          <span>AI Video Creator</span>
+        </div>
+      </aside>
+
+      <section class="hero-copy reveal interactive" aria-label="Portfolio intro">
+        <div class="circle-line"></div>
+        <div class="hero-content">
+          <div class="eyebrow"><span class="dot"></span> Motion - 3D - AI Visuals</div>
+          <h1>Turning brand ideas into visuals<br><em>Built to stand out.</em></h1>
+          <p class="hero-desc">
+            I help brands elevate how they present themselves through cinematic editing, immersive 3D visualization, and AI-assisted motion, creating visuals that feel sharp, memorable, and ready for modern audiences.
+          </p>
+
+          <div class="role-strip">
+            <div class="role-card" style="--r:-2deg"><strong>Video editing</strong><i></i></div>
+            <div class="role-card" style="--r:1.5deg"><strong>3D animation</strong><i></i></div>
+            <div class="role-card" style="--r:-1.3deg"><strong>3D modeling</strong><i></i></div>
+            <div class="role-card" style="--r:1.9deg"><strong>AI video editing</strong><i></i></div>
+            <div class="role-card" style="--r:-2.2deg"><strong>Graphic design</strong><i></i></div>
+            <div class="role-card" style="--r:1.1deg"><strong>Videography</strong><i></i></div>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-dark interactive" href="#work">Explore Projects</a>
+            <a class="btn btn-light interactive" href="#request">Start a Project</a>
+          </div>
+        </div>
+
+        <div class="hero-bottom">
+          <div class="metrics">
+            <div class="metric interactive"><strong>3D</strong><span>Spatial visualization, branded interiors, modeling, rendering, and presentation films.</span></div>
+            <div class="metric interactive"><strong>EDIT</strong><span>Fast-turnaround reels, campaign content, corporate stories, and social-first edits.</span></div>
+            <div class="metric interactive"><strong>AI</strong><span>ComfyUI, image-to-video workflows, prompt planning, and cinematic AI animation.</span></div>
+          </div>
+        </div>
+      </section>
     </header>
 
-    <!-- القسم الرئيسي (Hero Section) بنفس التأثيرات السايبير بنك -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <p class="subtitle">// VISUAL STORYTELLER & VIDEO EDITOR</p>
-            <h1>Crafting <span class="gradient-text">Cinematic Experiences</span> From Raw Footage.</h1>
-            <p class="description">أنا إسلام علي، مونتير محترف. أقوم بتحويل اللقطات الخام إلى قصص بصرية مبهرة تجذب الجمهور، مع التركيز على الإيقاع الديناميكي وتصحيح الألوان الاحترافي.</p>
-            
-            <div class="cta-group">
-                <a href="#work" class="btn-primary">View My Work <i class="fas fa-arrow-down"></i></a>
-                <a href="#contact" class="btn-secondary">Let's Talk</a>
-            </div>
+    <section id="about">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">About</div>
+          <h2>A creator who can move from idea to visual proof fast.</h2>
         </div>
+        <p>
+          From edited reels to immersive 3D previews and AI-driven motion, my work is focused on helping brands communicate ideas with clarity, speed, and a distinctive visual presence.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <article class="panel light reveal interactive">
+          <h3>Creative positioning</h3>
+          <p>
+            My work connects practical editing, 3D production, design thinking, and AI experimentation. The goal is not just to make something look good, but to turn rough briefs, references, and raw material into visuals that make a client understand the value immediately.
+          </p>
+          <div class="chips">
+            <span class="chip">Premiere Pro</span>
+            <span class="chip">After Effects</span>
+            <span class="chip">Blender</span>
+            <span class="chip">Photoshop</span>
+            <span class="chip">ComfyUI</span>
+            <span class="chip">AI Video</span>
+            <span class="chip">Motion Design</span>
+          </div>
+        </article>
+
+        <article class="panel reveal interactive">
+          <h3>Selected work preview</h3>
+          <p>
+            Below are selected samples across 3D visualization, video editing, and AI-powered animation. Some client work is shown in a limited way due to confidentiality, but each sample reflects the creative approach, speed, and production value behind the project.
+          </p>
+          <div class="chips">
+            <span class="chip">3D Visualization</span>
+            <span class="chip">Reel Editing</span>
+            <span class="chip">AI Animation</span>
+            <span class="chip">Client Work</span>
+            <span class="chip">Fast Delivery</span>
+          </div>
+        </article>
+
+        <article class="panel current-position-panel reveal interactive">
+          <h3>Current position</h3>
+          <p>
+            I am currently part of the media coverage team at Teleperformance Egypt, supporting visual production across videography, photography, video editing, photo editing, 3D visualization, and VFX work.
+          </p>
+          <div class="chips">
+            <span class="chip">Teleperformance Egypt</span>
+            <span class="chip">Media Coverage</span>
+            <span class="chip">Videography</span>
+            <span class="chip">Photography</span>
+            <span class="chip">Video Editing</span>
+            <span class="chip">Photo Editing</span>
+            <span class="chip">3D Visualization</span>
+            <span class="chip">VFX</span>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <!-- قسم معرض الأعمال (Selected Work) بنظام السلايدر المودرن -->
-    <section id="work" class="work-section">
-        <div class="section-title">
-            <h2>Selected Projects</h2>
-            <p>Showcasing high-end post-production, color grading, and visual effects.</p>
+    <section id="work">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Selected work</div>
+          <h2>Multidisciplinary work across motion, space, and AI.</h2>
+        </div>
+        <p class="work-access-note">
+          Tap or press any project card to open the full case view, including the story, role, tools, edits, videos, and selected media samples.
+        </p>
+      </div>
+
+      <div class="tabs-shell reveal interactive">
+        <div class="tab-row" role="tablist" aria-label="Portfolio categories">
+          <button class="tab-btn active" type="button" data-tab="editing" role="tab" aria-selected="true">Video Editing</button>
+          <button class="tab-btn" type="button" data-tab="threeD" role="tab" aria-selected="false">3D Animation & Rendering</button>
+          <button class="tab-btn" type="button" data-tab="ai" role="tab" aria-selected="false">AI Video Editing</button>
         </div>
 
-        <div class="projects-grid">
-            <!-- كارت المشروع الأول -->
-            <div class="project-card">
-                <div class="video-container">
-                    <!-- هنا هتحط فيديو من شغلك مستقبلاً -->
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="project-info">
-                    <span class="project-tag">Commercial</span>
-                    <h3>Brand Video Campaign</h3>
-                    <p>تعديل ألوان سينمائي، ضبط الصوت، وإيقاع سريع متوافق مع هوية البراند.</p>
-                </div>
-            </div>
-
-            <!-- كارت المشروع الثاني -->
-            <div class="project-card">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="project-info">
-                    <span class="project-tag">Social Media</span>
-                    <h3>Short-Form Reels</h3>
-                    <p>فيديوهات قصيرة سريعة الانتشار مصممة خصيصاً لزيادة التفاعل والمشاهدات.</p>
-                </div>
-            </div>
+        <div class="tab-content active" id="editing" role="tabpanel">
+          <div class="gallery-head">
+            <div><h3>Fast edits built for real deadlines.</h3></div>
+            <p>Reels, channel work, and corporate media edits designed to publish cleanly, move quickly, and keep the story clear.</p>
+          </div>
+          <div class="carousel-wrap">
+            <div class="project-track" data-category="editing"></div>
+            <div class="carousel-actions"><button class="arrow-btn" data-scroll="editing" data-dir="-1" aria-label="Scroll editing projects left">&lt;</button><button class="arrow-btn" data-scroll="editing" data-dir="1" aria-label="Scroll editing projects right">&gt;</button></div>
+          </div>
         </div>
+
+        <div class="tab-content" id="threeD" role="tabpanel">
+          <div class="gallery-head">
+            <div><h3>Spatial stories from plan to rendered reality.</h3></div>
+            <p>3D projects focused on visualizing spaces, brands, and experiences before they physically exist.</p>
+          </div>
+          <div class="carousel-wrap">
+            <div class="project-track" data-category="threeD"></div>
+            <div class="carousel-actions"><button class="arrow-btn" data-scroll="threeD" data-dir="-1" aria-label="Scroll 3D projects left">&lt;</button><button class="arrow-btn" data-scroll="threeD" data-dir="1" aria-label="Scroll 3D projects right">&gt;</button></div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="ai" role="tabpanel">
+          <div class="gallery-head">
+            <div><h3>Experimental AI motion with production intent.</h3></div>
+            <p>Image-to-video workflows, ComfyUI systems, and AI animation pieces refined through planning and post-production.</p>
+          </div>
+          <div class="carousel-wrap">
+            <div class="project-track" data-category="ai"></div>
+            <div class="carousel-actions"><button class="arrow-btn" data-scroll="ai" data-dir="-1" aria-label="Scroll AI projects left">&lt;</button><button class="arrow-btn" data-scroll="ai" data-dir="1" aria-label="Scroll AI projects right">&gt;</button></div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- قسم تواصل معي (Contact) -->
-    <section id="contact" class="contact-section">
-        <h2>Have a project in mind?</h2>
-        <p>دعنا نتحدث عن مشروعك القادم ونحوله إلى واقع بصري احترافي.</p>
-        <div class="social-links">
-            <a href="mailto:your-email@gmail.com" class="social-btn"><i class="fas fa-envelope"></i> Email</a>
-            <a href="https://wa.me/yournumber" class="social-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <section id="process">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Process</div>
+          <h2>Not just output - a visual system.</h2>
         </div>
+        <p>Every project can be framed as a clean case study: problem, approach, execution, and final result.</p>
+      </div>
+      <div class="process-grid">
+        <article class="process-card reveal interactive" data-step="01"><h3>Decode the brief</h3><p>Clarify what the project must achieve and what the viewer should understand quickly.</p></article>
+        <article class="process-card reveal interactive" data-step="02"><h3>Build the visual route</h3><p>Define pacing, composition, references, assets, prompts, camera language, and delivery format.</p></article>
+        <article class="process-card reveal interactive" data-step="03"><h3>Produce with speed</h3><p>Edit, render, generate, composite, and test multiple routes without losing the core objective.</p></article>
+        <article class="process-card reveal interactive" data-step="04"><h3>Package the result</h3><p>Deliver visuals in a way that feels sharp, client-ready, and easy to use across platforms.</p></article>
+      </div>
     </section>
 
-    <!-- الفوتر السفلي -->
+    <section id="request">
+      <div class="section-head reveal">
+        <div>
+          <div class="kicker">Project request</div>
+          <h2>A quick way to start the right conversation.</h2>
+        </div>
+        <p>Choose the type of work you need, refine the request, and the site prepares a Gmail or Outlook compose window with a clear subject and editable project intro.</p>
+      </div>
+
+      <div class="request-card reveal interactive" id="requestTool" aria-label="Project request tool">
+        <div class="request-start">
+          <button class="request-main-btn interactive" id="makeRequestBtn" type="button">Make a request</button>
+          <p class="request-microcopy">One click starts the flow. Pick a project lane, choose the exact request, adjust the prepared note if needed, then send it through Gmail or Outlook.</p>
+        </div>
+
+        <div class="request-choices" id="requestChoices" aria-hidden="true">
+          <button class="choice-btn interactive" type="button" data-category="threeD">3D Modeling & Visualization</button>
+          <button class="choice-btn interactive" type="button" data-category="editing">Video Editing</button>
+          <button class="choice-btn interactive" type="button" data-category="longTerm">Long-Term Project Request</button>
+        </div>
+
+        <div class="request-subchoices" id="requestSubChoices" aria-hidden="true">
+          <div class="request-step-label" id="requestSubLabel">Choose a focus</div>
+        </div>
+
+        <div class="request-form" id="requestForm" aria-hidden="true">
+          <label class="request-field">
+            Selected request
+            <select id="requestTypeSelect">
+              <optgroup label="3D Modeling & Visualization">
+                <option value="3D Modeling & Visualization - Interior Design">Interior Design Visualization</option>
+                <option value="3D Modeling & Visualization - Product Visualization">Product Visualization</option>
+                <option value="3D Modeling & Visualization - 3D Animation">3D Animation</option>
+              </optgroup>
+              <optgroup label="Video Editing">
+                <option value="Video Editing - Short-Form Reel Editing">Short-Form Reel Editing</option>
+                <option value="Video Editing - Long-Form Video Editing">Long-Form Video Editing</option>
+                <option value="Video Editing - Motion Design">Motion Design</option>
+              </optgroup>
+              <optgroup label="Long-Term Project Request">
+                <option value="Long-Term Project Request - 1-3 Months">1-3 Months</option>
+                <option value="Long-Term Project Request - 3-6 Months">3-6 Months</option>
+                <option value="Long-Term Project Request - 6+ Months">6+ Months</option>
+              </optgroup>
+            </select>
+          </label>
+
+          <label class="request-field">
+            Additional details
+            <textarea id="requestDetails" placeholder="A short project intro will appear here after you choose a request focus. You can edit it, add details, or clear it before sending."></textarea>
+          </label>
+
+          <p class="request-helper">The email subject and message intro update from the selected focus. You can edit the text before choosing Gmail or Outlook.</p>
+          <button class="send-request interactive" id="sendRequestBtn" type="button"><span>Send request</span></button>
+          <div class="mail-options" id="mailOptions" aria-hidden="true" aria-label="Choose email provider">
+            <button class="mail-option interactive" type="button" data-provider="gmail">Gmail</button>
+            <button class="mail-option interactive" type="button" data-provider="outlook">Outlook</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-card reveal interactive">
+      <div>
+        <div class="kicker">Direct communication</div>
+        <h2>Prefer direct communication?</h2>
+        <p>I am available through the following contact channels for video editing, 3D visualization, branded content, and AI-assisted motion projects.</p>
+      </div>
+      <div class="contact-links">
+        <a class="contact-link interactive" href="mailto:contact@ezz-tantawy.org"><span>Email</span><span>contact@ezz-tantawy.org</span></a>
+        <a class="contact-link interactive" href="https://www.linkedin.com/in/ezeldeen-tantawy-785189240/" target="_blank" rel="noopener"><span>LinkedIn</span><span>ezeldeen-tantawy</span></a>
+        <a class="contact-link interactive" href="https://wa.me/201014419160" target="_blank" rel="noopener"><span>WhatsApp</span><span>+20 1014419160</span></a>
+        <a class="contact-link interactive" href="#" id="discordLink"><span>Discord</span><span>ezeldeentantawy</span></a>
+      </div>
+    </section>
+
     <footer>
-        <p>&copy; 2026 Islam Ali. All rights reserved.</p>
+      <span>&copy; <span id="year"></span> Ezz Tantawy.</span>
+      <span>Video Editing - 3D Visualization - AI Video</span>
+      <span>This website was envisioned by Ezz-eldeen and built with the help of artificial intelligence.</span>
     </footer>
+  </main>
 
+  <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-card interactive">
+      <button class="close-modal" type="button" aria-label="Close project viewer">&times;</button>
+      <div class="modal-media">
+        <div class="stage" id="stage"></div>
+        <div class="media-tabs" id="mediaTabs"></div>
+        <div class="media-list" id="mediaList"></div>
+        <a class="open-external" id="openExternal" href="#" target="_blank" rel="noopener">Open current media externally</a>
+      </div>
+      <div class="modal-info">
+        <div class="modal-kicker" id="modalCategory"></div>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+        <div class="info-grid" id="modalInfoGrid"></div>
+        <div class="highlights" id="modalHighlights"></div>
+        <button class="expand-btn" type="button" id="expandBtn">Show full breakdown</button>
+        <div class="breakdown" id="breakdown"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mail-confirmation" id="mailConfirmation" aria-hidden="true" role="dialog" aria-modal="false">
+    <div class="mail-confirmation-card">
+      <button class="mail-confirmation-close" id="mailConfirmationClose" type="button" aria-label="Close email confirmation">&times;</button>
+      <div class="kicker">Request prepared</div>
+      <h2>Confirm the email in the new tab or mail app.</h2>
+      <p id="mailConfirmationText">Your request draft has been opened. Review the message, then press send when you are ready.</p>
+    </div>
+  </div>
+
+  <script src="app.js?v=20260605-color-grading-sample"></script>
 </body>
 </html>
