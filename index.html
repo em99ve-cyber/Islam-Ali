@@ -624,6 +624,7 @@
       transition: 0.34s var(--ease);
       text-align: left;
       padding: 0;
+      width: 100%;
     }
 
     .project-card::before {
@@ -885,28 +886,31 @@
     }
 
     .modal-media {
-      min-height: 300px;
-      background: var(--modal-image) center / cover;
+      min-height: 450px;
       position: relative;
+      background: #000;
     }
 
-    .modal-media::after {
-      content: "";
+    /* كود لجعل الفيديو المستدعى داخل المودال ريبونسيڤ ومظبوط النسبة */
+    .modal-media iframe {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent, rgba(9, 9, 9, 0.86));
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     .close-modal {
       position: absolute;
       top: 16px;
       right: 16px;
-      z-index: 2;
+      z-index: 10;
       width: 40px;
       height: 40px;
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.65);
       color: #fff;
       cursor: pointer;
       transition: 0.22s var(--ease);
@@ -978,6 +982,34 @@
       animation-duration: 5s;
     }
 
+    /* كود واجهة لوحة التحكم للعبة التفاعلية الاحترافية (HUD Panels) */
+    .hud-panel {
+      position: fixed;
+      top: 90px;
+      left: 20px;
+      z-index: 99;
+      background: rgba(23, 21, 19, 0.85);
+      border: 1px solid var(--accent);
+      padding: 12px 18px;
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+      font-size: 0.85rem;
+      display: none;
+      box-shadow: 0 0 20px rgba(255, 138, 61, 0.2);
+    }
+
+    body.play-mode .hud-panel {
+      display: block;
+    }
+
+    .hud-line {
+      margin-bottom: 6px;
+    }
+
+    .hud-line strong {
+      color: var(--accent-2);
+    }
+
     @media (max-width: 980px) {
       .hero,
       .section-head,
@@ -1036,10 +1068,6 @@
         padding: 0 10px;
       }
 
-      .play-mode-btn {
-        display: none;
-      }
-
       .hero {
         padding-top: 38px;
       }
@@ -1088,6 +1116,14 @@
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
+  <div id="gameHudPanel" class="hud-panel" aria-hidden="true">
+    <div class="hud-line">Score: <strong id="shipCounter">00000</strong></div>
+    <div class="hud-line">Level: <strong id="levelStatus">1</strong></div>
+    <div class="hud-line">Kills: <strong id="killsStatus">0</strong></div>
+    <div class="hud-line">HP: <strong id="healthStatus">100/100</strong></div>
+    <div class="hud-line" style="font-size:0.75rem; color:var(--muted)">Press X or click to shoot elements!</div>
+  </div>
+
   <main class="page" id="top">
     <nav class="nav reveal visible">
       <div class="site-shell nav-inner">
@@ -1096,10 +1132,10 @@
           <a class="interactive" href="#about">About</a>
           <a class="interactive" href="#work">Work</a>
           <a class="interactive" href="#process">Process</a>
-          <button class="play-mode-btn interactive" type="button">Play</button>
-          <button class="theme-switch interactive" type="button" aria-label="Toggle color theme">
+          <button id="playModeBtn" class="play-mode-btn interactive" type="button">Play</button>
+          <button id="themeSwitch" class="theme-switch interactive" type="button" aria-label="Toggle color theme">
             <span class="theme-track"><span class="theme-thumb"></span></span>
-            <span class="theme-label">Dark</span>
+            <span class="theme-label theme-switch-text">Dark</span>
           </button>
           <a class="nav-cta interactive" href="#request">Request</a>
         </div>
@@ -1138,7 +1174,7 @@
         </div>
         <div class="cta-row">
           <a class="btn primary interactive" href="#work">Explore Projects</a>
-          <a class="btn interactive" href="#request">Start a Project</a>
+          <a id="makeRequestBtn" class="btn interactive" href="#request">Start a Project</a>
         </div>
       </section>
     </div>
@@ -1209,7 +1245,7 @@
 
         <div class="project-stage">
           <div class="project-track active" data-track="editing">
-            <button class="project-card interactive" type="button" data-title="Campaign Reel Edit" data-category="Video Editing" data-role="Editor" data-tools="Premiere Pro, After Effects" data-year="2026" data-summary="A campaign-style reel shaped for pace, clarity, and publish-ready impact." data-breakdown="Built around quick viewer understanding, clean rhythm, and a strong hook. The edit balances branded moments, music accents, and sharp transitions without losing the message." style="--image:url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1000&q=82')">
+            <button class="project-card interactive" type="button" data-id="commercial-brand-campaign">
               <span class="press-label">Press to explore</span>
               <div class="project-body">
                 <div class="project-tag">Video Editing</div>
@@ -1219,87 +1255,13 @@
               </div>
             </button>
 
-            <button class="project-card interactive" type="button" data-title="Social-first Brand Cut" data-category="Video Editing" data-role="Editor / Post-production" data-tools="Premiere Pro, Photoshop" data-year="2026" data-summary="A social-first brand cut designed to move fast while still feeling polished." data-breakdown="The structure keeps the strongest visuals close to the top, trims dead space, and uses music timing to make the final video feel confident and ready for distribution." style="--image:url('https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1000&q=82')">
+            <button class="project-card interactive" type="button" data-id="social-media-reels">
               <span class="press-label">Press to explore</span>
               <div class="project-body">
                 <div class="project-tag">Video Editing</div>
                 <h3>Fast edits with a finished, branded feel.</h3>
                 <p>Social content shaped to be clear, dynamic, and easy to publish.</p>
                 <div class="project-meta"><span>Brand video</span><span>2026</span><span>Social</span></div>
-              </div>
-            </button>
-
-            <button class="project-card interactive" type="button" data-title="Urgent Promo Turnaround" data-category="Video Editing" data-role="Editor" data-tools="Premiere Pro, After Effects" data-year="2026" data-summary="A fast promo edit built under deadline pressure." data-breakdown="The goal was to deliver a direct, high-energy promo without making the timeline feel rushed. The result focuses on readable information, clean pacing, and a strong ending." style="--image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1000&q=82')">
-              <span class="press-label">Press to explore</span>
-              <div class="project-body">
-                <div class="project-tag">Video Editing</div>
-                <h3>Urgent promos without losing polish.</h3>
-                <p>Deadline-friendly editing that keeps the message sharp and usable.</p>
-                <div class="project-meta"><span>Promo</span><span>Fast delivery</span><span>Post</span></div>
-              </div>
-            </button>
-          </div>
-
-          <div class="project-track" data-track="color">
-            <button class="project-card interactive" type="button" data-title="Cinematic Color Pass" data-category="Color Grading" data-role="Colorist" data-tools="DaVinci Resolve" data-year="2026" data-summary="A cinematic grade focused on mood, contrast, and skin tone balance." data-breakdown="The grade starts with a clean correction pass, then shapes contrast and warmth to support the emotional tone. Skin stays natural while the frame gets a stronger visual identity." style="--image:url('https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1000&q=82')">
-              <span class="press-label">Press to explore</span>
-              <div class="project-body">
-                <div class="project-tag">Color Grading</div>
-                <h3>Atmosphere shaped through color and contrast.</h3>
-                <p>Color work focused on mood, tone, skin, and cinematic consistency.</p>
-                <div class="project-meta"><span>Grade</span><span>Look dev</span><span>DaVinci</span></div>
-              </div>
-            </button>
-
-            <button class="project-card interactive" type="button" data-title="Raw Footage Correction" data-category="Color Correction" data-role="Colorist" data-tools="DaVinci Resolve, Premiere Pro" data-year="2026" data-summary="A correction pass that turns flat footage into clean, balanced visuals." data-breakdown="Exposure, white balance, and contrast are corrected first, then the image is shaped into a cleaner look that can hold up across a full edit." style="--image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=82')">
-              <span class="press-label">Press to explore</span>
-              <div class="project-body">
-                <div class="project-tag">Color Correction</div>
-                <h3>Raw-looking footage cleaned and balanced.</h3>
-                <p>Correction work that gives the edit a stable visual foundation.</p>
-                <div class="project-meta"><span>Correction</span><span>Balance</span><span>Skin tones</span></div>
-              </div>
-            </button>
-
-            <button class="project-card interactive" type="button" data-title="Brand Color Direction" data-category="Color Grading" data-role="Colorist / Editor" data-tools="DaVinci Resolve, Premiere Pro" data-year="2026" data-summary="A color direction pass built to keep a brand video visually consistent." data-breakdown="The grade uses controlled contrast and warm highlights to keep the brand feeling polished, while matching shots so the full piece feels like one visual world." style="--image:url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=82')">
-              <span class="press-label">Press to explore</span>
-              <div class="project-body">
-                <div class="project-tag">Color Direction</div>
-                <h3>A consistent look across every frame.</h3>
-                <p>Shot matching and visual direction for polished brand content.</p>
-                <div class="project-meta"><span>Brand</span><span>Color</span><span>Consistency</span></div>
-              </div>
-            </button>
-          </div>
-
-          <div class="project-track" data-track="story">
-            <button class="project-card interactive" type="button" data-title="Narrative YouTube Edit" data-category="Visual Storytelling" data-role="Editor" data-tools="Premiere Pro, After Effects" data-year="Ongoing" data-summary="Narrative editing for structured, watchable YouTube content." data-breakdown="The edit focuses on structure, pacing, retention, and emotional flow. Each section is shaped so the viewer understands the point quickly and stays connected to the story." style="--image:url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1000&q=82')">
-              <span class="press-label">Press to explore</span>
-              <div class="project-body">
-                <div class="project-tag">Visual Storytelling</div>
-                <h3>Narrative edits with emotional direction.</h3>
-                <p>Longer edits shaped around structure, clarity, and viewer retention.</p>
-                <div class="project-meta"><span>YouTube</span><span>Story</span><span>Ongoing</span></div>
-              </div>
-            </button>
-
-            <button class="project-card interactive" type="button" data-title="Mood-driven Sequence" data-category="Visual Storytelling" data-role="Editor / Colorist" data-tools="Premiere Pro, DaVinci Resolve" data-year="2026" data-summary="A sequence built to carry atmosphere through pacing and color." data-breakdown="The storytelling comes from the order of shots, the rhythm of cuts, and the color choices. The final piece aims to feel intentional, not just assembled." style="--image:url('https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=1000&q=82')">
-              <span class="press-label">Press to explore</span>
-              <div class="project-body">
-                <div class="project-tag">Mood Building</div>
-                <h3>Sequences that feel designed, not assembled.</h3>
-                <p>Atmosphere built through shot order, movement, music, and grade.</p>
-                <div class="project-meta"><span>Mood</span><span>Edit</span><span>Grade</span></div>
-              </div>
-            </button>
-
-            <button class="project-card interactive" type="button" data-title="Client Story Package" data-category="Visual Storytelling" data-role="Editor / Post-production" data-tools="Premiere Pro, After Effects, Photoshop" data-year="2026" data-summary="A client-ready story package prepared for multiple platforms." data-breakdown="The package turns raw material into a set of clear deliverables, with strong pacing, consistent color, and versions that can work across social and presentation formats." style="--image:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=82')">
-              <span class="press-label">Press to explore</span>
-              <div class="project-body">
-                <div class="project-tag">Client Work</div>
-                <h3>Stories packaged for modern platforms.</h3>
-                <p>Client-ready edits prepared with pace, color, and delivery in mind.</p>
-                <div class="project-meta"><span>Client</span><span>Delivery</span><span>Platforms</span></div>
               </div>
             </button>
           </div>
@@ -1342,31 +1304,39 @@
 
     <section id="request">
       <div class="site-shell">
-        <div class="request-card reveal interactive">
+        <div id="requestTool" class="request-card reveal interactive">
           <div>
             <p class="kicker">Request</p>
             <h2>Start with the type of visual you need.</h2>
             <p class="request-copy">
               Pick the closest service, add a short note, then send it by email. The message will open with the project type already included.
             </p>
-            <div class="choice-grid" aria-label="Project type">
-              <button class="choice-btn active interactive" type="button" data-choice="Video Editing">Video Editing</button>
-              <button class="choice-btn interactive" type="button" data-choice="Color Grading">Color Grading</button>
-              <button class="choice-btn interactive" type="button" data-choice="Full Post-production">Full Post-production</button>
+            
+            <div id="requestChoices" class="choice-grid" aria-label="Project type">
+              <button class="choice-btn active interactive" type="button" data-category="editing">Video Editing</button>
             </div>
+            <div id="requestSubChoices" style="margin-top: 15px;"></div>
           </div>
 
-          <form class="request-form">
+          <div id="requestForm" class="request-form">
             <label class="field">
-              Your name
-              <input name="name" placeholder="Name or brand" />
+              Select Focus Category
+              <select id="requestTypeSelect" style="width:100%; padding:12px; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid var(--line); color:#fff;">
+                <option value="Video Editing - Commercial Brand Campaign">Commercial Brand Campaign</option>
+                <option value="Video Editing - Short-Form Reels/Shorts">Short-Form Social Reels</option>
+              </select>
             </label>
             <label class="field">
               Project note
-              <textarea name="message" placeholder="Tell me about the footage, deadline, platform, and style."></textarea>
+              <textarea id="requestDetails" placeholder="Tell me about the footage, deadline, platform, and style."></textarea>
             </label>
-            <button class="btn primary interactive send-request" type="submit">Send request</button>
-          </form>
+            <button id="sendRequestBtn" class="btn primary interactive send-request" type="button"><span>Send request</span></button>
+            
+            <div id="mailOptions" style="display:flex; gap:10px; margin-top:10px;">
+              <button class="mail-option btn interactive" data-provider="gmail" type="button">Gmail</button>
+              <button class="mail-option btn interactive" data-provider="outlook" type="button">Outlook</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1382,7 +1352,7 @@
             </p>
           </div>
           <div class="contact-actions">
-            <a class="btn primary interactive" href="mailto:em99ve@gmail.com">Email</a>
+            <a class="btn primary interactive" href="mailto:contact@islam-ali.com">Email</a>
             <a class="btn interactive" href="https://www.facebook.com/elkinge99" target="_blank" rel="noreferrer">Facebook</a>
             <a class="btn interactive" href="https://www.instagram.com/islam.m.aly" target="_blank" rel="noreferrer">Instagram</a>
             <a class="btn interactive" href="https://api.whatsapp.com/send?phone=201069298477&text=Hi%20let%27s%20work%20together" target="_blank" rel="noreferrer">WhatsApp</a>
@@ -1392,151 +1362,51 @@
     </section>
 
     <footer>
-      <div class="site-shell">Copyright <span id="year"></span> Islam Ali. Editing / Color Grading / Visual Storytelling</div>
+      <div class="site-shell">Copyright &copy; <span id="year">2026</span> Islam Ali. Editing / Color Grading / Visual Storytelling</div>
     </footer>
   </main>
 
-  <div class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="mailConfirmation" class="modal-backdrop" style="z-index: 120;">
+    <div class="modal" style="max-width:500px; padding:30px; text-align:center;">
+      <h3 style="color:var(--accent);">Draft Prepared!</h3>
+      <p id="mailConfirmationText" style="font-size:0.95rem; margin-top:15px; color:var(--muted); line-height:1.6;"></p>
+      <button id="mailConfirmationClose" class="btn primary" style="margin-top:20px; min-height:38px;" type="button">Got it</button>
+    </div>
+  </div>
+
+  <div id="projectModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <article class="modal">
-      <div class="modal-media">
-        <button class="close-modal interactive" type="button" aria-label="Close project view">X</button>
-      </div>
+      <div id="stage" class="modal-media">
+        </div>
+      <button class="close-modal interactive" type="button" aria-label="Close project view">X</button>
+      
       <div class="modal-content">
-        <p class="kicker modal-category">Video Editing</p>
-        <h2 id="modal-title">Project title</h2>
-        <p class="contact-copy modal-summary">Project summary</p>
+        <div id="mediaTabs" class="tabs-shell" style="margin-bottom:20px;"></div>
+        <p id="modalCategory" class="kicker">Video Editing</p>
+        <h2 id="modalTitle">Project title</h2>
+        <p id="modalDescription" class="contact-copy">Project summary</p>
+        
         <div class="modal-grid">
-          <div class="breakdown">
+          <div id="breakdown" class="breakdown">
             <h3>Breakdown</h3>
             <p class="modal-breakdown"></p>
           </div>
-          <div class="fact-list">
-            <div class="fact"><strong>Role</strong><span class="modal-role"></span></div>
-            <div class="fact"><strong>Tools</strong><span class="modal-tools"></span></div>
-            <div class="fact"><strong>Year</strong><span class="modal-year"></span></div>
-          </div>
+          <div id="modalInfoGrid" class="fact-list"></div>
         </div>
+        <div id="modalHighlights" style="margin-top:20px; display:grid; gap:8px;"></div>
+        <div style="margin-top:25px; display:flex; gap:10px;">
+           <button id="expandBtn" class="btn interactive" type="button">Show full breakdown</button>
+           <a id="openExternal" class="btn primary interactive" href="#" target="_blank" style="display:none;">Open Video Externally</a>
+        </div>
+        <div id="mediaList" style="margin-top:20px;"></div>
       </div>
     </article>
   </div>
 
-  <script>
-    const body = document.body;
-    const year = document.querySelector("#year");
-    const themeButton = document.querySelector(".theme-switch");
-    const themeLabel = document.querySelector(".theme-label");
-    const playButton = document.querySelector(".play-mode-btn");
-    const ring = document.querySelector(".cursor-ring");
-    const dot = document.querySelector(".cursor-dot");
-    const modalBackdrop = document.querySelector(".modal-backdrop");
-    const modal = document.querySelector(".modal");
-    const modalMedia = document.querySelector(".modal-media");
-    const selectedChoice = { value: "Video Editing" };
+  <div id="spaceWar" style="position:fixed; inset:0; pointer-events:none; z-index:5;">
+     <span id="playerShip" style="position:fixed; width:30px; height:30px; background:var(--accent); border-radius:50%; display:none; transform:translate(-50%,-50%); box-shadow:0 0 15px var(--accent);"></span>
+  </div>
 
-    year.textContent = new Date().getFullYear();
-
-    if (localStorage.getItem("theme") === "light") {
-      body.classList.add("light");
-      themeLabel.textContent = "Light";
-    }
-
-    themeButton.addEventListener("click", () => {
-      const isLight = body.classList.toggle("light");
-      localStorage.setItem("theme", isLight ? "light" : "dark");
-      themeLabel.textContent = isLight ? "Light" : "Dark";
-    });
-
-    playButton.addEventListener("click", () => {
-      body.classList.toggle("fun-mode");
-      playButton.textContent = body.classList.contains("fun-mode") ? "Restore" : "Play";
-    });
-
-    if (matchMedia("(pointer:fine)").matches) {
-      window.addEventListener("pointermove", (event) => {
-        body.classList.add("cursor-ready");
-        ring.style.transform = `translate3d(${event.clientX - 17}px, ${event.clientY - 17}px, 0)`;
-        dot.style.transform = `translate3d(${event.clientX - 3}px, ${event.clientY - 3}px, 0)`;
-      });
-
-      document.addEventListener("mouseover", (event) => {
-        if (event.target.closest(".interactive, a, button")) body.classList.add("cursor-active");
-      });
-
-      document.addEventListener("mouseout", (event) => {
-        if (event.target.closest(".interactive, a, button")) body.classList.remove("cursor-active");
-      });
-    }
-
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.14 });
-
-    document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
-
-    document.querySelectorAll(".tab-btn").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".tab-btn").forEach((tab) => tab.classList.remove("active"));
-        document.querySelectorAll(".project-track").forEach((track) => track.classList.remove("active"));
-        button.classList.add("active");
-        document.querySelector(`[data-track="${button.dataset.tab}"]`).classList.add("active");
-      });
-    });
-
-    document.querySelectorAll(".project-card").forEach((card) => {
-      card.addEventListener("click", () => openProject(card));
-    });
-
-    function openProject(card) {
-      const image = getComputedStyle(card).getPropertyValue("--image");
-      modalMedia.style.setProperty("--modal-image", image);
-      document.querySelector(".modal-category").textContent = card.dataset.category;
-      document.querySelector("#modal-title").textContent = card.dataset.title;
-      document.querySelector(".modal-summary").textContent = card.dataset.summary;
-      document.querySelector(".modal-breakdown").textContent = card.dataset.breakdown;
-      document.querySelector(".modal-role").textContent = card.dataset.role;
-      document.querySelector(".modal-tools").textContent = card.dataset.tools;
-      document.querySelector(".modal-year").textContent = card.dataset.year;
-      modalBackdrop.classList.add("open");
-      body.classList.add("modal-open");
-      document.querySelector(".close-modal").focus();
-    }
-
-    function closeProject() {
-      modalBackdrop.classList.remove("open");
-      body.classList.remove("modal-open");
-    }
-
-    document.querySelector(".close-modal").addEventListener("click", closeProject);
-    modalBackdrop.addEventListener("click", (event) => {
-      if (!modal.contains(event.target)) closeProject();
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && modalBackdrop.classList.contains("open")) closeProject();
-    });
-
-    document.querySelectorAll(".choice-btn").forEach((button) => {
-      button.addEventListener("click", () => {
-        document.querySelectorAll(".choice-btn").forEach((choice) => choice.classList.remove("active"));
-        button.classList.add("active");
-        selectedChoice.value = button.dataset.choice;
-      });
-    });
-
-    document.querySelector(".request-form").addEventListener("submit", (event) => {
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      const name = data.get("name") || "New client";
-      const message = data.get("message") || "I want to discuss a project.";
-      const subject = encodeURIComponent(`${selectedChoice.value} request from ${name}`);
-      const bodyText = encodeURIComponent(`Project type: ${selectedChoice.value}\nName: ${name}\n\n${message}`);
-      window.location.href = `mailto:em99ve@gmail.com?subject=${subject}&body=${bodyText}`;
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
