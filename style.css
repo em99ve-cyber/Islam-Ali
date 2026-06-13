@@ -1,268 +1,283 @@
+/* الألوان والخطوط الأصلية لموقع عز طنطاوي */
+:root {
+    --bg-color: #050505;
+    --card-bg: #0d0d0d;
+    --border-color: #1a1a1a;
+    --text-main: #ffffff;
+    --text-muted: #808080;
+    --accent-color: #3b82f6; /* اللون الأزرق المودرن */
+    --accent-glow: rgba(59, 130, 246, 0.2);
+}
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    scroll-behavior: smooth;
 }
 
 body {
-  background-color: #080808;
-  color: #a3a3a3;
-  overflow-x: hidden;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    overflow-x: hidden;
 }
 
+/* هيدر شفاف مع تأثير بلور زجاجي */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 5%;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 100;
-  background: rgba(8, 8, 8, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid #171717;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 6%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background: rgba(5, 5, 5, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .logo {
-  color: #fff;
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: 1px;
-}
-
-.logo .accent {
-  color: #a3a3a3;
-  font-weight: 400;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
 }
 
 .logo .dot {
-  color: #3b82f6;
+    color: var(--accent-color);
 }
 
 nav a {
-  color: #737373;
-  text-decoration: none;
-  margin-left: 25px;
-  font-size: 0.9rem;
-  transition: 0.3s ease;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 0.9rem;
+    transition: 0.3s;
 }
 
 nav a:hover {
-  color: #fff;
+    color: var(--text-main);
 }
 
 nav a.nav-cta {
-  background-color: #fff;
-  color: #000;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-weight: 600;
+    background: var(--text-main);
+    color: var(--bg-color);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: 600;
 }
 
-.hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 0 10%;
-  border-bottom: 1px solid #171717;
-  background: radial-gradient(circle at 80% 20%, #1e3a8a33 0%, transparent 50%);
+/* القسم الرئيسي المفتوح (Hero) */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+    background: radial-gradient(circle at 90% 10%, var(--accent-glow) 0%, transparent 60%);
 }
 
-.hero-container {
-  max-width: 850px;
-  text-align: left;
+.hero-content {
+    max-width: 800px;
 }
 
 .subtitle {
-  color: #3b82f6;
-  font-size: 0.85rem;
-  letter-spacing: 2px;
-  font-weight: 700;
-  margin-bottom: 20px;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
-.hero h1 {
-  color: #fff;
-  font-size: 3.8rem;
-  font-weight: 800;
-  line-height: 1.15;
-  margin-bottom: 25px;
-  letter-spacing: -1px;
+.hero-content h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 25px;
 }
 
-.name-highlight {
-  background: linear-gradient(45deg, #fff, #3b82f6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.gradient-text {
+    background: linear-gradient(45deg, #ffffff, var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .description {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  margin-bottom: 35px;
-  color: #a3a3a3;
-  direction: rtl; /* لجعل النص العربي من اليمين لليسار بشكل منسق */
-  text-align: right;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    direction: rtl;
+    text-align: right;
+    max-width: 700px;
 }
 
-.skills-tags {
-  text-align: left;
-  margin-bottom: 30px;
+.cta-group {
+    display: flex;
+    gap: 20px;
 }
 
-.skills-tags span {
-  display: inline-block;
-  background: #171717;
-  color: #e5e5e5;
-  padding: 6px 14px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  margin: 0 8px 12px 0;
-  border: 1px solid #262626;
+.btn-primary {
+    background: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px var(--accent-glow);
 }
 
-.main-btn {
-  display: inline-block;
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem;
-  border-bottom: 2px solid #3b82f6;
-  padding-bottom: 5px;
-  transition: 0.3s;
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px var(--accent-glow);
 }
 
-.main-btn:hover {
-  color: #3b82f6;
-  padding-left: 10px;
+.btn-secondary {
+    border: 1px solid var(--border-color);
+    color: white;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
+.btn-secondary:hover {
+    background: #111;
+    border-color: var(--text-muted);
+}
+
+/* قسم المشاريع الفخم */
 .work-section {
-  padding: 100px 5%;
-  background-color: #0a0a0a;
+    padding: 120px 8%;
+    border-top: 1px solid var(--border-color);
 }
 
-.section-header {
-  margin-bottom: 60px;
-  text-align: center;
+.section-title {
+    margin-bottom: 60px;
 }
 
-.section-header h2 {
-  color: #fff;
-  font-size: 2.5rem;
-  margin-bottom: 15px;
+.section-title h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
 }
 
-.projects-slider {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 40px;
+.section-title p {
+    color: var(--text-muted);
+}
+
+/* شبكة عرض الفيديوهات (Grid) النظيفة */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 40px;
 }
 
 .project-card {
-  background: #111111;
-  border: 1px solid #1f1f1f;
-  border-radius: 16px;
-  padding: 24px;
-  position: relative;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 20px;
+    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-card:hover {
-  transform: translateY(-8px);
-  border-color: #3b82f6;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    transform: translateY(-10px);
+    border-color: var(--accent-color);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
 }
 
-.badge {
-  position: absolute;
-  top: 38px;
-  left: 38px;
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  padding: 6px 14px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  border-radius: 6px;
-  z-index: 10;
-  letter-spacing: 0.5px;
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 20px;
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.project-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--accent-color);
+    background: var(--accent-glow);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
 }
 
-.card-details h3 {
-  color: #fff;
-  font-size: 1.3rem;
-  margin-bottom: 10px;
+.project-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
 }
 
-.card-details p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  direction: rtl;
-  text-align: right;
+.project-info p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    direction: rtl;
+    text-align: right;
 }
 
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: #525252;
-  border-top: 1px solid #1f1f1f;
-  padding-top: 15px;
-}
-
+/* قسم التواصل */
 .contact-section {
-  padding: 120px 5%;
-  text-align: center;
-  border-top: 1px solid #171717;
-  background: radial-gradient(circle at 50% 100%, #1e3a8a22 0%, transparent 60%);
+    padding: 120px 8%;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    background: radial-gradient(circle at 50% 100%, var(--accent-glow) 0%, transparent 50%);
 }
 
 .contact-section h2 {
-  color: #fff;
-  font-size: 2.8rem;
-  margin-bottom: 15px;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
 }
 
-.contact-grid {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 40px;
+.contact-section p {
+    color: var(--text-muted);
+    margin-bottom: 40px;
 }
 
-.contact-item {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.1rem;
-  padding: 15px 50px;
-  background: #111;
-  border: 1px solid #1f1f1f;
-  border-radius: 30px;
-  transition: 0.3s;
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
-.contact-item:hover {
-  background: #3b82f6;
-  border-color: #3b82f6;
-  transform: scale(1.05);
+.social-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: white;
+    text-decoration: none;
+    padding: 14px 40px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.social-btn:hover {
+    background: white;
+    color: black;
+}
+
+footer {
+    padding: 40px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border-color);
 }
